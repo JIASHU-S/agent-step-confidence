@@ -156,11 +156,6 @@ agentconf/seqmodel.py  M0/M1 in PyMC, PSIS-LOO comparison, forward recursion, ha
 scripts/               stages 01-08 and the full-workflow runner
 ```
 
-## Disclosure
-
-Code was written with the help of an AI coding assistant. Study design, experiments, analysis and writing are by
-the author.
-
 ## Results in this repository
 
 `results/qwen7b/` (Qwen2.5-7B-Instruct) and `results/llama8b/` (Llama-3.1-8B-Instruct) hold the analysis outputs
