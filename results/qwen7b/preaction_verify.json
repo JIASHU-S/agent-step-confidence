@@ -1,0 +1,53 @@
+{
+ "threshold": 0.99,
+ "passed": true,
+ "minimum_cosine": 1.0,
+ "verified_trajectories": 3,
+ "records": [
+  {
+   "qid": "5abf63f15542997ec76fd3ea",
+   "step": 1,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5abf63f15542997ec76fd3ea",
+   "step": 2,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5abf63f15542997ec76fd3ea",
+   "step": 3,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5abf63f15542997ec76fd3ea",
+   "step": 4,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5a7555215542996c70cfaee1",
+   "step": 1,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5a7555215542996c70cfaee1",
+   "step": 2,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5a7555215542996c70cfaee1",
+   "step": 3,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5a8595a85542992a431d1b48",
+   "step": 1,
+   "cosine": 1.0
+  },
+  {
+   "qid": "5a8595a85542992a431d1b48",
+   "step": 2,
+   "cosine": 1.0
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+ "pooling": "last",
+ "layer": 23,
+ "oof_auroc_train": 0.8749813440503201,
+ "test_auroc": 0.8784000139599611
+}

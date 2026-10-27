@@ -1,0 +1,11 @@
+{
+  "files": 900,
+  "steps": 2744,
+  "all_shapes_correct": true,
+  "all_features_finite": true,
+  "has_action_true": 2744,
+  "verify_minimum_cosine": 1.0,
+  "verify_checks": 9,
+  "verified_trajectories": 3,
+  "pre_step_embedding_layer_constant": true
+}

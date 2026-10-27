@@ -1,0 +1,12 @@
+torch>=2.3
+transformers>=4.51
+accelerate
+bitsandbytes>=0.43
+datasets>=3.0
+numpy
+scipy
+scikit-learn
+pymc>=5.10
+arviz
+matplotlib
+pytest
