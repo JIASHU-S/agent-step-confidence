@@ -1,0 +1,23 @@
+{
+  "python": "3.10.10",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.6",
+    "accelerate": "1.15.0",
+    "bitsandbytes": "0.50.2",
+    "datasets": "5.0.1",
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "pymc": "5.25.1",
+    "arviz": "0.23.4",
+    "matplotlib": "3.10.9",
+    "pytest": "9.1.1",
+    "hf_xet": "1.7.0"
+  },
+  "cuda_runtime": "12.4",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 4070 Ti",
+  "gpu_memory_bytes": 12878086144,
+  "nf4_gpu_forward": "passed (2 x 64 input)"
+}
