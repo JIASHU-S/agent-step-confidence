@@ -105,6 +105,9 @@ python scripts/04_trajectory.py --run runs/qwen7b --signal probe
 
 # 5. figures
 python scripts/05_figures.py --run runs/qwen7b
+
+# 6. step-position control, after 06-08 (CPU, minutes; not part of run_experiment.py)
+python scripts/09_position_control.py --run runs/qwen7b
 ```
 
 Results go to `runs/<name>/results/`. Hidden states are stored for 8 evenly spaced layers (`--layers` to change),
@@ -153,7 +156,7 @@ agentconf/checkpoints.py  collection locks, configuration checks, per-question r
 agentconf/io.py        atomic files, durable JSONL appends and incomplete-tail repair
 agentconf/probes.py    standardise -> PCA -> logistic probes, grouped cross-validation
 agentconf/seqmodel.py  M0/M1 in PyMC, PSIS-LOO comparison, forward recursion, hand-off curves
-scripts/               stages 01-08 and the full-workflow runner
+scripts/               stages 01-08, the full-workflow runner and the step-position control (09)
 ```
 
 ## Results in this repository
