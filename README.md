@@ -46,7 +46,9 @@ python -m venv .venv
 
 `scripts/python_local.ps1` uses `.venv` and keeps Hugging Face, Matplotlib, ArviZ and PyTensor caches in `.cache/`.
 Use it in place of `python` in the commands below. Without a C++ compiler, PyMC falls back to its slower Python
-backend.
+backend. The launcher checks `F:\Anaconda\envs\pytensor-compiler\Library\bin` for a conda-forge `gxx`
+compiler and adds it to `PATH` for that run. Set `PYTENSOR_COMPILER_BIN` to the compiler's `Library\bin`
+directory if it is installed elsewhere. This does not change the system-wide `PATH`.
 
 The recorded experiment environment is included in [`reproducibility/environment.json`](reproducibility/environment.json).
 For the pinned Windows / Python 3.10 / CUDA 12.4 environment, install the archived dependency versions instead of

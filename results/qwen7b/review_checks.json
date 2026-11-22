@@ -1,0 +1,230 @@
+{
+ "text_baseline": {
+  "all": {
+   "n": 902,
+   "text_auroc": 0.7447980764847988,
+   "probe_auroc": 0.8345412279502256,
+   "consistency_auroc": 0.7324456447422398,
+   "text_plus_probe_auroc": 0.8417601075709922,
+   "probe_minus_text": {
+    "point": 0.08974315146542677,
+    "ci_low": 0.05586746603468116,
+    "ci_high": 0.125546452618113
+   },
+   "text_minus_consistency": {
+    "point": 0.012352431742558956,
+    "ci_low": -0.03322679642915442,
+    "ci_high": 0.05668582326088546
+   }
+  },
+  "Search": {
+   "n": 616,
+   "text_auroc": 0.7881944444444444,
+   "probe_auroc": 0.8705020387359836,
+   "consistency_auroc": 0.7511213047910297,
+   "text_plus_probe_auroc": 0.8785040774719673,
+   "probe_minus_text": {
+    "point": 0.08230759429153922,
+    "ci_low": 0.0422042831504468,
+    "ci_high": 0.1257572918937836
+   },
+   "text_minus_consistency": {
+    "point": 0.037073139653414744,
+    "ci_low": -0.020057945527556475,
+    "ci_high": 0.09286617514235465
+   }
+  },
+  "Finish": {
+   "n": 286,
+   "text_auroc": 0.530880177514793,
+   "probe_auroc": 0.7391694843617921,
+   "consistency_auroc": 0.698806001690617,
+   "text_plus_probe_auroc": 0.7429205409974641,
+   "probe_minus_text": {
+    "point": 0.2082893068469991,
+    "ci_low": 0.11833175430750405,
+    "ci_high": 0.2956600165066956
+   },
+   "text_minus_consistency": {
+    "point": -0.16792582417582402,
+    "ci_low": -0.2567936874933006,
+    "ci_high": -0.08305099288591
+   }
+  },
+  "first_search": {
+   "n": 300,
+   "accuracy": 0.84,
+   "probe_auroc": 0.8056382275132274,
+   "consistency_auroc": 0.67588458994709,
+   "probe_minus_consistency": {
+    "point": 0.12975363756613745,
+    "ci_low": 0.03518825169032653,
+    "ci_high": 0.22216122980848393
+   }
+  },
+  "repeat_queries_test": {
+   "n": 14,
+   "accuracy": 0.0
+  }
+ },
+ "within_question_equal_weight": {
+  "n_questions": 134,
+  "probe": {
+   "point": 0.7892412935323383,
+   "ci_low": 0.7467337164750959,
+   "ci_high": 0.834163955622289
+  },
+  "consistency": {
+   "point": 0.696849087893864,
+   "ci_low": 0.654843585368774,
+   "ci_high": 0.7416703216374269
+  },
+  "probe_minus_consistency": {
+   "point": 0.09239220563847428,
+   "ci_low": 0.04253681392235609,
+   "ci_high": 0.14095793704710152
+  }
+ },
+ "finish_probe_minus_consistency": {
+  "point": 0.040363482671175066,
+  "ci_low": -0.02622928176795572,
+  "ci_high": 0.1049512056519233
+ },
+ "rq3": {
+  "brier": {
+   "M0_last": 0.19157552364140334,
+   "M0_product": 0.260281183621923,
+   "M0_min": 0.21226812738473305,
+   "M1_forward": 0.19316164037542158
+  },
+  "ece": {
+   "M0_last": 0.057279111686302404,
+   "M0_product": 0.20009997675163546,
+   "M0_min": 0.08167328974298926,
+   "M1_forward": 0.027222854433904188
+  },
+  "mean_confidence": {
+   "M0_last": 0.6263509416974213,
+   "M0_product": 0.43942708798920443,
+   "M0_min": 0.5683625548592723,
+   "M1_forward": 0.6189545077839043
+  },
+  "ece_product_minus_forward": {
+   "point": 0.17287712231773128,
+   "ci_low": 0.08235609240380837,
+   "ci_high": 0.18602478546380352
+  },
+  "ece_last_minus_forward": {
+   "point": 0.030056257252398216,
+   "ci_low": -0.029687476336493667,
+   "ci_high": 0.055006484444372075
+  },
+  "auroc_forward_minus_last": {
+   "point": -0.004068047337278058,
+   "ci_low": -0.017202786573393837,
+   "ci_high": 0.008559388653515106
+  },
+  "brier_forward_minus_last": {
+   "point": 0.0015861167340182336,
+   "ci_low": -0.0015827625971149306,
+   "ci_high": 0.004815411390851464
+  }
+ },
+ "rq2_source_only": {
+  "selected": {
+   "pooling": "last",
+   "layer": 20,
+   "trivia_oof_auroc": 0.8959886830750057
+  },
+  "agent_test_auroc": 0.6233419937098319,
+  "ece_raw": 0.5229577790221466,
+  "sweep": [
+   {
+    "pooling": "mean",
+    "layer": 0,
+    "trivia_oof_auroc": 0.5862199206332509
+   },
+   {
+    "pooling": "mean",
+    "layer": 4,
+    "trivia_oof_auroc": 0.6446389373952438
+   },
+   {
+    "pooling": "mean",
+    "layer": 8,
+    "trivia_oof_auroc": 0.720560316024329
+   },
+   {
+    "pooling": "mean",
+    "layer": 12,
+    "trivia_oof_auroc": 0.8144188604730147
+   },
+   {
+    "pooling": "mean",
+    "layer": 16,
+    "trivia_oof_auroc": 0.8844864153820414
+   },
+   {
+    "pooling": "mean",
+    "layer": 20,
+    "trivia_oof_auroc": 0.8922788235447342
+   },
+   {
+    "pooling": "mean",
+    "layer": 24,
+    "trivia_oof_auroc": 0.8443642294602719
+   },
+   {
+    "pooling": "mean",
+    "layer": 28,
+    "trivia_oof_auroc": 0.8368954196308975
+   },
+   {
+    "pooling": "last",
+    "layer": 0,
+    "trivia_oof_auroc": 0.5700820817691912
+   },
+   {
+    "pooling": "last",
+    "layer": 4,
+    "trivia_oof_auroc": 0.644154040821479
+   },
+   {
+    "pooling": "last",
+    "layer": 8,
+    "trivia_oof_auroc": 0.7219058038312839
+   },
+   {
+    "pooling": "last",
+    "layer": 12,
+    "trivia_oof_auroc": 0.8211593235893166
+   },
+   {
+    "pooling": "last",
+    "layer": 16,
+    "trivia_oof_auroc": 0.8863308256967132
+   },
+   {
+    "pooling": "last",
+    "layer": 20,
+    "trivia_oof_auroc": 0.8959886830750057
+   },
+   {
+    "pooling": "last",
+    "layer": 24,
+    "trivia_oof_auroc": 0.8772590519871243
+   },
+   {
+    "pooling": "last",
+    "layer": 28,
+    "trivia_oof_auroc": 0.87076404271498
+   }
+  ]
+ },
+ "finish_borderline": {
+  "n_all_splits": 225,
+  "n_test": 73,
+  "test_labelled_correct": 44,
+  "test_finish_total": 286
+ }
+}

@@ -1,0 +1,210 @@
+qid,t,split,answer,gold,f1,label
+5a70f0a75542994082a3e403,2,test,Scanian dialect,Scanian dialects,0.5,1
+5a7108fa5542994082a3e4ef,3,train,Battle of Cold Harbor,Second Battle of Bull Run,0.4444444444444445,0
+5a71148b5542994082a3e567,3,train,"2,615","The population was 2,615",0.5,1
+5a713a5a5542994082a3e6a9,3,train,Manchester United F.C.,Manchester United,0.8,1
+5a714de95542994082a3e7a8,3,test,Stevie Young,Stephen Crawford Young,0.4,0
+5a72160e55429971e9dc9253,4,test,Benjamin Cheever,Benjamin Hale Cheever,0.8,1
+5a7217f255429971e9dc9260,2,train,Sir Nicholas Winterton,Sir Nicholas Raymond Winterton,0.8571428571428571,1
+5a721dfd55429971e9dc928b,3,train,Thorgan Hazard,Thorgan Ganael Francis Hazard,0.6666666666666666,1
+5a722a6855429971e9dc9320,3,test,Maria Shvetsova,Chief Detective Maria Shvetsova,0.6666666666666666,1
+5a7283355542991f9a20c4b1,3,train,Frederick Barbarossa,Frederick I,0.5,1
+5a7283365542991f9a20c4b2,3,train,Rule of three (writing),rule of three,0.8571428571428571,1
+5a7292385542994cef4bc342,3,train,Alan Menken and Howard Ashman,Howard Elliott Ashman,0.5,1
+5a7319e755429901807daf86,5,train,total touchdowns,most total touchdowns in NCAA history,0.5,1
+5a7331de5542994cef4bc4a8,3,train,"March 27, 1977","On March 27, 1977, two Boeing 747 passenger jets, KLM Flight 4805 and Pan Am Flight 1736, collided on the runway at Los Rodeos Airport (now Tenerife North Airport)",0.19354838709677416,0
+5a7354d55542994cef4bc55a,4,train,"psilocybin, psilocin, and baeocystin",psilocin,0.4,0
+5a747a3755429974ef308c09,3,train,"musician, singer",singer and songwriter,0.4,0
+5a749e1855429979e28829c3,3,test,Emilio Sánchez,Emilio Ángel Sánchez Vicario,0.6666666666666666,1
+5a750de95542993748c897ac,2,train,Sam Neill,Nigel John Dermot Neill,0.3333333333333333,0
+5a7518cb55429916b0164259,3,train,Rafael Márquez (boxer),Rafael Márquez,0.8,1
+5a75c02f5542992db94736b4,3,test,Himalchuli,"Himalchuli has three main peaks: East (7893 m), West (7540 m) and North (7371 m)",0.125,0
+5a75f32055429976ec32bcb7,3,test,Jim Davis (actor),Jim Davis,0.8,1
+5a7643675542994ccc918747,3,test,D. Ross Lederman,David Ross Lederman,0.6666666666666666,1
+5a7759fc5542993569682d60,3,train,Spain,"Canary Islands, Spain",0.5,1
+5a77626b5542993569682d77,3,train,Marika Green,Marika Nicolette Green,0.8,1
+5a7797175542992a6e59df10,3,train,England,"Newcastle upon Tyne, England",0.4,0
+5a77a4fd5542997042120abc,3,train,Samuel Eto'o,Samuel Eto'o Fils,0.8,1
+5a77b1a75542992a6e59df8d,3,test,True Williams,"Truman W. ""True"" Williams",0.6666666666666666,1
+5a77b5c255429967ab10523c,4,train,Eddie Collins,Edward Trowbridge Collins Sr.,0.3333333333333333,0
+5a78abbc554299148911f90c,2,test,Forbes,Forbes ranked Schreiber Foods,0.4,0
+5a78d16455429974737f78bb,3,train,Ernst Messerschmid,Ernst Willi Messerschmid,0.8,1
+5a78ed6855429970f5fffdd9,3,train,"approximately 28,776","28,776 at the 2010 census",0.3333333333333333,0
+5a78f753554299078472776e,3,test,Philip Labonte,Philip Steven Labonte,0.8,1
+5a79186f55429907847277af,4,train,"Panama City, Panama",Panama City,0.8,1
+5a79c1095542996c55b2dc62,3,test,Sam Taylor (director),Sam Taylor,0.8,1
+5a79cabc5542994f819ef0a1,2,test,M Marco Fu,Marco Fu,0.8,1
+5a79f04d5542996c55b2dca7,3,train,Syracuse University,"University of California, Berkeley",0.3333333333333333,0
+5a7a49d85542994f819ef1bc,3,train,Leslie S. Hiscott,Leslie Stephenson Hiscott,0.6666666666666666,1
+5a7a94f155429941d65f26ca,3,test,"1,000 ft","about 1,000 ft above sea level",0.5,1
+5a7b4d765542995eb53be8fe,3,train,12 years,12,0.6666666666666666,1
+5a7b55bc55429927d897bf98,4,test,20,20 assists,0.6666666666666666,1
+5a7b5af7554299042af8f752,2,test,over 250 million,265 million,0.4,0
+5a7b9f1f554299294a54aa2a,3,train,Marc Webb,Marc Preston Webb,0.8,1
+5a7bbcd65542997c3ec97268,3,train,Chanda Rubin,"Chanda Rubin (born February 18, 1976)",0.5,1
+5a7bc42e554299294a54aabe,3,train,Golden Globe Award,Academy Award,0.4,0
+5a7c8ae855429935c91b5207,4,train,Alexander Borodin,Alexander Porfiryevich Borodin,0.8,1
+5a7ca4485542990527d554f1,3,train,"2027 Fairmount Avenue, Philadelphia",2027 Fairmount Avenue,0.8571428571428571,1
+5a7cb84a554299683c1c6350,3,train,April 2012,April,0.6666666666666666,1
+5a7d07a455429907fabef0ae,3,train,Juventus F.C.,Juventus Football Club,0.4,0
+5a7d119d5542995ed0d165d5,3,train,Florence Welch,Florence Leontine Mary Welch,0.6666666666666666,1
+5a7da3a95542990b8f5039e6,3,train,first base,first baseman,0.5,1
+5a7dab795542990b8f503a22,3,test,El Chavo del Ocho,El Chavo Animado,0.5714285714285715,1
+5a7e279d5542995ed0d166b5,3,test,"approximately 265,000","265,000",0.6666666666666666,1
+5a7efa7a55429930675135ea,4,test,died in the sinking of the RMS Titanic,"perished on the RMS ""Titanic""",0.4,0
+5a7f18a35542994959419aa6,3,test,West coast,west,0.6666666666666666,1
+5a7f3c8f55429930675136c9,2,test,published,published campaign settings,0.5,1
+5a7f40de5542992e7d278cc8,3,train,Rick Ducommun,"Richard ""Rick"" Ducommun",0.8,1
+5a7f7e3a5542992097ad2f89,3,train,Eddie Albert,Edward Albert Heimberger,0.4,0
+5a7f8b8c5542995d8a8ddea1,3,test,dice,a pair of dice,0.5,1
+5a7fb6625542994857a767cc,4,test,Emmy Awards,BAFTA Awards for Best Actress,0.28571428571428575,0
+5a80b9df5542992bc0c4a7ec,3,train,"""The King""","""The King of Hollywood""",0.5,1
+5a80c01855429938b61421b8,4,train,Bill Lewis and George O'Leary,Bill Lewis,0.5714285714285715,1
+5a80c74f554299260e20a158,4,test,Dennis Hull,"Dennis Hull, as well as painter Manley MacDonald.",0.4,0
+5a80db5055429938b6142218,2,train,"Zack Snyder's ""Dawn of the Dead""",Zack Snyder,0.28571428571428575,0
+5a81df4b55429903bc27b9f8,4,test,Almeda Mall,Northwest Mall,0.5,1
+5a81df7d55429926c1cdadaa,2,test,European Cup,European Champion Clubs' Cup,0.6666666666666666,1
+5a81ff62554299676cceb1c4,3,train,film director and producer,director,0.4,0
+5a8210f355429926c1cdae24,3,train,BAFTA TV Award,BAFTA TV Award Best Actor,0.7499999999999999,1
+5a825f2155429954d2e2eb1b,3,train,Hillary Clinton,Hillary Rodham Clinton,0.8,1
+5a82ebb855429966c78a6a9c,4,train,Shukratara by Date,Shukratara,0.5,1
+5a8315c055429966c78a6b2d,4,train,Mike Fiers,Michael Bruce Fiers,0.4,0
+5a8351fd55429954d2e2ec98,5,test,The Mighty Thor,Thor,0.6666666666666666,1
+5a843cf35542996488c2e51b,3,train,the film industry,film,0.6666666666666666,1
+5a84995d5542997b5ce3fee4,3,train,Alachua County,Alachua,0.6666666666666666,1
+5a84a97f5542992a431d1a87,3,train,D. Napier &amp; Son,D. Napier & Son,0.8571428571428571,1
+5a84e4bc5542997b5ce3ff81,3,test,French forces,French,0.6666666666666666,1
+5a84ee4c5542997175ce1f2b,3,train,Grand Valley State University,Carleton University,0.3333333333333333,0
+5a84f7255542991dd0999e33,4,test,Chad,Republic of Chad,0.5,1
+5a8563c05542997b5ce3fff4,3,test,"Yes, Chestnut trees grow in the Northern Hemisphere, but the distribution of Arenga trees in the Northern Hemisphere is less clear. However, it is likely that Arenga trees do grow in the Northern Hemisphere, given their distribution in Southeast Asia and southern China.",yes,0.05,0
+5a862f985542991e771815af,2,train,Gus Van Sant,"American film ""Elephant"" by Gus Van Sant",0.6,1
+5a863114554299211dda2aa5,3,train,F. Keogh Gleason,Francis Keogh Gleason,0.6666666666666666,1
+5a865bbf5542991e77181615,4,train,Ghostbusters (2016 film),Ghostbusters: Answer the Call,0.3333333333333333,0
+5a874ce15542996432c57256,3,train,Mississippi,"Laurel, Mississippi",0.6666666666666666,1
+5a87c19a5542994846c1cde6,3,train,eastern shore of the Firth of Clyde,Firth of Clyde,0.6666666666666666,1
+5a8835dc5542994846c1ce2b,3,test,BBC,BBC Formula One,0.5,1
+5a8a43eb5542996c9b8d5e82,5,test,Marion,"Marion, South Australia",0.5,1
+5a8a547d55429970aeb70293,3,train,The Lady (magazine),The Lady,0.6666666666666666,1
+5a8afb9955429971feec45c2,2,train,California Screamin',Disney California Adventure,0.4,0
+5a8b3c0055429949d91db4f8,6,train,No information is available to determine if Paul Sloane directed more musicals than Jacques Demy,no,0.125,0
+5a8bba645542995e66a474e5,3,train,1907,8 August 1907,0.5,1
+5a8c52685542995e66a475bb,3,train,8th,Minnesota's 8th congressional district,0.4,0
+5a8cf064554299585d9e3775,4,train,board games,board,0.6666666666666666,1
+5a8d0efd5542994ba4e3dbc6,4,test,Warsaw,"Warsaw, Poland",0.6666666666666666,1
+5a8d8e4f5542994ba4e3dca7,3,train,approximately 3 miles,approximately 3 mi,0.6666666666666666,1
+5a8d9f35554299441c6ba018,3,train,"No, they are not from the same country",no,0.25,0
+5a8e0a005542995085b373a1,3,test,IT products,IT products and services,0.6666666666666666,1
+5a8f18d555429918e830d189,3,train,Caistor,Caistor is a town,0.5,1
+5a8f5bb45542992414482a77,3,test,over four and a half million,more than four and a half million people,0.6666666666666666,1
+5a8f791c5542992414482ad9,3,train,death metal bands,death metal band,0.6666666666666666,1
+5a8f812755429918e830d245,4,train,Robert M. Fomon was a governor of the New York Stock Exchange,a governor,0.18181818181818182,0
+5a907bf05542995651fb5164,2,test,1522 miles,1522,0.6666666666666666,1
+5ab1f13e554299449642c81c,3,train,PBS,aired on PBS stations,0.4,0
+5ab2342a5542993be8fa98c3,3,test,107 acres,"22,500 acres",0.5,1
+5ab266b5554299340b5254b4,3,test,"Citizens' Action Party presidential primary, 2017",Citizens for a Sound Economy,0.2,0
+5ab27389554299722f9b4d2f,2,train,Pete Sell,Peter 'Drago' Sell,0.4,0
+5ab29426554299545a2cf99f,3,test,Cleveland Cavaliers,Cavaliers,0.6666666666666666,1
+5ab2b6fb5542992953946848,3,train,indoor ski slope on artificial snow,indoor ski slope,0.6666666666666666,1
+5ab2c418554299545a2cfa67,3,train,Hotchkiss M1914 machine gun,Mle 1914 Hotchkiss machine gun,0.6666666666666665,1
+5ab2f6bd554299166977415e,3,test,Sutton Hoo helmet,is widely believed to have been the helmet of King Rædwald of East Anglia,0.125,0
+5ab3bcc55542992ade7c6e66,3,train,2002 United States Senate election in Minnesota,2002,0.25,0
+5ab3bfd3554299233954ff99,4,train,Dirk Nowitzki,Dirk Werner Nowitzki,0.8,1
+5ab3c18b55429969a97a81b0,4,train,"1988, Doyle's Cafe",St. Patrick's Day in 1988,0.25,0
+5ab416a25542996a3a969f28,3,train,"the Caribbean, specifically in the islands that are now the U.S. Virgin Islands",Caribbean,0.18181818181818182,0
+5ab482815542990594ba9c3d,3,train,Kiernan Shipka,Kiernan Brennan Shipka,0.8,1
+5ab4e3065542990594ba9cb4,3,test,"""Teach the Controversy""","""Teach the Controversy"" campaign",0.8,1
+5ab6266555429953192ad277,3,train,more than 27 languages,27 languages,0.6666666666666666,1
+5ab674ee5542995eadeefff2,3,test,three,three official languages,0.5,1
+5ab682dc55429954757d3318,3,test,New Mexico,"Albuquerque, New Mexico",0.8,1
+5ab69e4f554299710c8d1eee,2,test,child actress,child actor,0.5,1
+5ab6e07b55429954757d33a0,3,test,Peter Townsend (RAF officer),Peter Wooldridge Townsend,0.5714285714285715,1
+5ab78a445542992aa3b8c826,3,train,over 140 million,140 million,0.8,1
+5ab808b85542991d3222380d,3,train,Polytheistic and animistic religion,belief in many deities and spirits,0.2,0
+5ab8338155429919ba4e2260,4,test,Mark Brayshaw,Mark Andrew Brayshaw,0.8,1
+5ab846e155429919ba4e229c,3,test,Tony Roche,Anthony Dalton Roche,0.4,0
+5ab89cc25542991b5579efc3,3,test,The Battle of Agincourt,Battle of Agincourt (1415),0.8571428571428571,1
+5ab8ffc655429934fafe6e30,3,train,2003,June 2003,0.6666666666666666,1
+5ab93262554299131ca422b6,4,test,heavy metal and new folk,heavy metal band,0.5,1
+5ab99a215542996be202056a,3,test,Aberdeenshire,"Aberdeenshire, Scotland",0.6666666666666666,1
+5ab9d0b755429955dce3ed8f,3,test,Elizabeth Schuyler Hamilton,Elizabeth Hamilton,0.8,1
+5ab9e2055542994dbf019884,3,train,rock band,band,0.6666666666666666,1
+5aba510f5542994dbf0198d6,3,test,Yakuza series,Yakuza,0.6666666666666666,1
+5aba549f554299232ef4a290,3,train,hip hop ballad,a midtempo hip hop ballad,0.8571428571428571,1
+5aba5c625542994dbf0198f2,3,train,John Wesley and George Whitefield,George Whitefield,0.5714285714285715,1
+5aba65a055429939ce03dcd2,3,train,Arab,North African Arab,0.5,1
+5abb17e75542996cc5e49fa2,3,train,Tehran,"Tehran, Iran",0.6666666666666666,1
+5abb23035542992ccd8e7f22,3,test,Washington,"Mount Rainier, Washington",0.5,1
+5abba8545542993f40c73b72,3,test,Edward Kennedy,Caroline Kennedy,0.5,1
+5abbaf6c554299660624171c,3,train,Director and writer,film director,0.4,0
+5abbdd565542993f40c73bfb,3,train,VNO,"IATA: VNO, ICAO: EYVI",0.4,0
+5abc817c5542993a06baf8fd,3,train,late 1960s,in the late 1960s,0.8,1
+5abd5b0355429933744ab789,3,test,Abbey Road,"This road is best known for the Abbey Road Studios and the 1969 album, ""Abbey Road"", by The Beatles.",0.2222222222222222,0
+5abe2b0155429976d4830a83,3,train,August 1914,26–30 August 1914,0.8,1
+5abe7f695542993f32c2a12d,3,test,young superheroes,focus on young superheroes,0.6666666666666666,1
+5abfdc185542994516f45513,5,train,Commerce,Bachelor of Commerce,0.5,1
+5ac002705542996f0d89cb05,3,train,county-level cities,county-level,0.6666666666666666,1
+5ac01e77554299012d1db5ac,3,test,English folk-song,Tudor music and English folk-song,0.5714285714285715,1
+5ac027005542996f0d89cb3d,4,train,Amber Heard,Amber Laura Heard,0.8,1
+5ac07a17554299294b219000,4,train,general aviation airport,public use airport,0.3333333333333333,0
+5ac13e195542994ab5c67cc5,3,train,Stan,Kramer's caddy Stan,0.5,1
+5ac19bf55542994ab5c67d97,2,train,Kansas Joe McCoy and Memphis Minnie,Joe McCoy and Memphis Minnie,0.9090909090909091,1
+5ac2583b55429951e9e68565,3,train,"Both Brian G. Hutton and Xawery Żuławski are film directors, but Brian G. Hutton is also an actor.",Xawery Żuławski,0.21052631578947367,0
+5ac2ada255429967731025f9,3,train,"Yes, Rudolf Schwarzkogler was closely associated with the Viennese Actionism group, while Howard Zieff was an American television commercial director.",yes,0.10526315789473684,0
+5ac2d85e55429921a00ab06b,3,train,"Somerset County, Pennsylvania",Pennsylvania,0.5,1
+5ac300905542996773102682,3,train,Dani Filth,Cradle of Filth,0.4,0
+5ac3295d5542995ef918c14d,3,train,DI Richard Poole,Richard Poole,0.8,1
+5ac3ac1855429939154138ab,3,train,"Eleutherococcus is a genus of thorny shrubs and trees, while Amaryllis is a genus of flowering bulbs.",genus,0.125,0
+5ac3d21e554299204fd21e8b,3,train,Michael Tippett,Michael Kemp Tippett,0.8,1
+5ac3e07b5542997ea680c96c,4,test,Václav Havel Airport Prague,Václav Havel Airport,0.8571428571428571,1
+5ac413ca5542997ea680c9e9,2,test,Washington metropolitan area,"Washington, D.C.",0.4,0
+5ac45cfd554299076e296db5,3,train,three years,three,0.6666666666666666,1
+5ac5188255429924173fb5a3,3,test,"over 3,000","3,000",0.6666666666666666,1
+5ac54f8d5542993e66e822f5,3,test,7 June 1954,1954,0.5,1
+5adbd60855429944faac2377,3,test,Edmund White,Edmund Valentine White III,0.6666666666666666,1
+5adbf44355429944faac23ce,3,test,County of Honolulu,Honolulu,0.5,1
+5adbfbd555429947ff173893,3,train,Kelly Osbourne,Kelly Lee Osbourne,0.8,1
+5adc5b875542996e68525328,5,train,2007 St. Louis Cardinals season,2006 season,0.28571428571428575,0
+5adc82fc554299438c868dce,3,test,all 30 Major League Baseball teams and their 160 minor league affiliates,30 Major League Baseball teams,0.5882352941176471,1
+5adca8215542994ed6169bbc,2,test,Johnny Galecki,John Mark Galecki,0.4,0
+5add13b15542994ed6169c65,5,test,to protect the northern flank of the Japanese Empire,protect the northern flank of the Japanese Empire,0.923076923076923,1
+5add44c25542997545bbbd0a,3,train,Roman Polanski,Rajmund Roman Thierry Polański,0.3333333333333333,0
+5add97c15542997545bbbd80,3,train,tennis,professional tennis player,0.5,1
+5ade28b15542997c77aded83,3,train,"Yes, for Virgilia; Yes, for Koeleria",yes,0.2857142857142857,0
+5ade3bf75542997c77adedb8,3,train,Noam Chomsky,Avram Noam Chomsky,0.8,1
+5ade450b5542997c77adedc5,2,test,"The Northeast megalopolis includes major cities such as Boston, New York City, Philadelphia, and Baltimore.","Boston, Providence, Hartford, New York City, Philadelphia, Wilmington, Baltimore, and Washington, D.C.",0.5384615384615384,1
+5ade881f5542992fa25da7af,3,train,Alan Turing,Alan Mathison Turing,0.8,1
+5adeacf955429975fa854f66,3,train,Rachel Maddow,Rachel Anne Maddow,0.8,1
+5adec5055542995534e8c707,3,test,Caesars Entertainment,Caesars Entertainment Corporation,0.8,1
+5adf04c95542993a75d263d5,2,test,Eddie Leonski,Edward Joseph Leonski,0.4,0
+5adf4b335542993a75d264a5,3,train,Rockstar Games,Rockstar San Diego,0.4,0
+5adf6b405542992d7e9f9341,3,train,Heather Graham Pozzessere,Heather Graham,0.8,1
+5adf86b45542993344016cc1,5,test,"Diego, Prince of Asturias",Diego Félix of Austria,0.5,1
+5adf8f675542995534e8c7eb,3,train,Outside (magazine),Outside,0.6666666666666666,1
+5adf9dc3554299025d62a2e6,3,test,Laura Osnes,Laura Ann Osnes,0.8,1
+5adfa1f9554299025d62a308,2,train,Bill Woodfull,"William Maldon ""Bill"" Woodfull",0.6666666666666666,1
+5ae063085542993d6555eb37,3,train,Season 6,sixth season,0.5,1
+5ae0b0af55429945ae959424,3,train,Sam Raimi,Ivan Raimi,0.5,1
+5ae0e183554299422ee9953f,3,train,Suining,"In 2002, Suining had a population of 658,798.",0.25,0
+5ae0f73d55429920d5234252,3,test,Ford Field,Ford Field in Detroit,0.6666666666666666,1
+5ae1ab715542997f29b3c0f7,3,train,Eric Whitacre,Eric Edward Whitacre,0.8,1
+5ae1b01b5542997283cd2237,2,train,romantic comedy,Romantic comedy films,0.8,1
+5ae1da385542997283cd2297,3,train,"Katharine Hepburn, Joan Bennett, and Frances Dee","Katharine Hepburn, Joan Bennett, Frances Dee",0.923076923076923,1
+5ae1fb7a554299234fd04383,3,train,"Memphis, Tennessee",Memphis,0.6666666666666666,1
+5ae22b8d554299234fd0440f,3,train,IFFHS World's Best Goalkeeper,World's Best Goalkeeper,0.8571428571428571,1
+5ae267a35542992decbdccee,3,test,"Attorney General, Lord Chancellor",Attorney General and as Lord Chancellor of England,0.6666666666666666,1
+5ae277575542996483e649b2,2,train,Shaw Brothers Studio,Shaw Brothers,0.8,1
+5ae454355542996836b02c77,3,train,4,4 albums,0.6666666666666666,1
+5ae496735542995dadf2435d,3,train,Big 12 Conference,Big 12,0.8,1
+5ae49bb755429970de88d9d7,2,train,Al-Masjid an-Nabawi,Al-Masjid an-Nabawī,0.5,1
+5ae53b545542990ba0bbb23c,3,train,Flamingo Las Vegas,Las Vegas Strip in Paradise,0.5,1
+5ae55b8255429908b63265ef,4,train,Masa Takayama,"Masayoshi ""Masa"" Takayama",0.8,1
+5ae5691055429960a22e02f3,3,train,over 1800,"1,800",0.6666666666666666,1
+5ae5be02554299546bf82f3e,3,test,Eren Ozmen,Fatih Ozmen,0.5,1
+5ae5e1345542996de7b71a50,3,test,Jack Ryan (character),Jack Ryan,0.8,1
+5ae5f47c5542996de7b71a82,3,train,Sanshou,Sanshou (Wushu Sanshou),0.5,1
+5ae6233c5542992ae0d1623e,2,train,schoolmaster,schoolmaster at J. L. Young's Adelaide Educational Institution and at Saint Peter's College.,0.14285714285714288,0
+5ae657d55542995703ce8b5b,3,test,"81,000","81,000 seats",0.6666666666666666,1
+5ae65e6a5542996d980e7b1d,3,test,London,"City of Westminster, London",0.4,0
+5ae70c7b5542991bbc9761aa,4,train,"Francis Egerton, 3rd Duke of Bridgewater",Francis Egerton,0.5,1
+5ae73eca5542991e8301cc37,3,train,The Beast in Beauty and the Beast,the voice of The Beast,0.25,0
+5ae7e8f55542994a481bbe06,2,train,James Bond,Commander James Bond RN,0.6666666666666666,1

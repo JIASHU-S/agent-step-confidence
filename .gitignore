@@ -17,5 +17,7 @@ runs/
 .env.*
 !.env.example
 experiment.txt
+data/submission_v2/**/*.parquet
+data/submission_v2/**/*.part
 *.pem
 *.key
