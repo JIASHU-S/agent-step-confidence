@@ -1,0 +1,12 @@
+{
+  "comparison_count": 342,
+  "matches": 342,
+  "mismatches": [],
+  "seconds_by_model": {
+    "qwen7b": 25.699767000041902,
+    "llama8b": 28.383571600017603
+  },
+  "threads": 16,
+  "bootstrap_replicates": 2000,
+  "scope": "Archived inputs, selected probe fits, scalar metrics and selected paired intervals; not full end-to-end generation."
+}

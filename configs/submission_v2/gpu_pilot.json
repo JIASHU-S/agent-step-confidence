@@ -1,0 +1,75 @@
+{
+  "status": "data_ready_weights_pending",
+  "scope": "10 legacy development episodes/model; no final-test data",
+  "network_downloads_started": true,
+  "models": {
+    "qwen7b": {
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": null,
+      "tokenizer_revision": null,
+      "local_snapshot_path": null,
+      "dataset_revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "examples_jsonl": "manifests/submission_v2/p0/pilot_examples.jsonl",
+      "episode_ids": [
+        "5a70f0a75542994082a3e403",
+        "5a70f4c45542994082a3e437",
+        "5a711ef85542994082a3e5ac",
+        "5a71446b5542994082a3e72a",
+        "5a714de95542994082a3e7a8",
+        "5a72160e55429971e9dc9253",
+        "5a722a6855429971e9dc9320",
+        "5a72a0be5542992359bc3143",
+        "5a72ba1a5542992359bc318b",
+        "5a730abe5542994cef4bc42f"
+      ]
+    },
+    "llama8b": {
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "model_revision": null,
+      "tokenizer_revision": null,
+      "local_snapshot_path": null,
+      "dataset_revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "examples_jsonl": "manifests/submission_v2/p0/pilot_examples.jsonl",
+      "episode_ids": [
+        "5a70f0a75542994082a3e403",
+        "5a70f4c45542994082a3e437",
+        "5a711ef85542994082a3e5ac",
+        "5a71446b5542994082a3e72a",
+        "5a714de95542994082a3e7a8",
+        "5a72160e55429971e9dc9253",
+        "5a722a6855429971e9dc9320",
+        "5a72a0be5542992359bc3143",
+        "5a72ba1a5542992359bc318b",
+        "5a730abe5542994cef4bc42f"
+      ]
+    }
+  },
+  "required_before_run": [
+    "explicit existing local snapshot path and revision for model/tokenizer",
+    "pinned HotpotQA source and exact 10-paragraph examples",
+    "verify selected IDs match question/text stored in legacy archive"
+  ],
+  "settings": {
+    "nf4": true,
+    "greedy_agent": true,
+    "max_steps": 6,
+    "k_samples": 5,
+    "sample_temperature": 0.7,
+    "sample_batch_size": 1,
+    "max_new_tokens": 128,
+    "cuda_synchronize_for_each_phase": true,
+    "warmup_episodes": 1,
+    "warmup_excluded_from_measurement": true
+  },
+  "phase_metrics": [
+    "greedy_generation",
+    "feature_extraction",
+    "alternative_sampling",
+    "verbal_prompt",
+    "prefix_replay",
+    "total_wall_time",
+    "generated_token_count",
+    "peak_vram"
+  ],
+  "dataset_status": "pinned files verified; seeded IDs, saved labels and observations matched"
+}

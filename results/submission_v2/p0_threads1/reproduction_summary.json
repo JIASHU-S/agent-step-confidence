@@ -1,0 +1,211 @@
+{
+  "comparison_count": 342,
+  "matches": 324,
+  "mismatches": [
+    {
+      "model": "qwen7b",
+      "table": "position_baseline",
+      "row": "step index + probe before step",
+      "metric": "auroc",
+      "recomputed": 0.775103696613337,
+      "archived": 0.7750979989972195,
+      "difference": 5.697616117461557e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "legacy zero-shot",
+      "metric": "auroc",
+      "recomputed": 0.7165720862391176,
+      "archived": 0.716577783855235,
+      "difference": -5.697616117350535e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "legacy zero-shot",
+      "metric": "brier",
+      "recomputed": 0.4179592006255619,
+      "archived": 0.4179573413433753,
+      "difference": 1.859282186600364e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "legacy zero-shot",
+      "metric": "ece",
+      "recomputed": 0.470990412167913,
+      "archived": 0.47098859538140836,
+      "difference": 1.8167865046270215e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "TriviaQA probe + Platt on 50 agent steps",
+      "metric": "auroc",
+      "recomputed": 0.7165720862391177,
+      "archived": 0.7165777838552352,
+      "difference": -5.697616117461557e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "auroc",
+      "recomputed": 0.7313656616071836,
+      "archived": 0.7313576849446192,
+      "difference": 7.976662564468384e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "qwen7b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "auroc_sd",
+      "recomputed": 0.04299852923626047,
+      "archived": 0.04302418074312662,
+      "difference": -2.565150686614781e-05,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "selected_probe_refit",
+      "row": "action",
+      "metric": "auroc",
+      "recomputed": 0.878391288984282,
+      "archived": 0.8784000139599611,
+      "difference": -8.724975679164082e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "selected_probe_refit",
+      "row": "action",
+      "metric": "ece",
+      "recomputed": 0.02558855647619232,
+      "archived": 0.025583931787124203,
+      "difference": 4.62468906811675e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "preaction_refit",
+      "row": "pre_action",
+      "metric": "auroc",
+      "recomputed": 0.7914163689268716,
+      "archived": 0.7914250939025507,
+      "difference": -8.72497567905306e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "preaction_refit",
+      "row": "pre_action",
+      "metric": "brier",
+      "recomputed": 0.1658650833108155,
+      "archived": 0.16587051911943834,
+      "difference": -5.435808622833438e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "position_baseline",
+      "row": "step index + probe before step",
+      "metric": "ece",
+      "recomputed": 0.03839817741208051,
+      "archived": 0.03840198823651174,
+      "difference": -3.810824431231541e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "auroc",
+      "recomputed": 0.7788209940364791,
+      "archived": 0.7788137959315439,
+      "difference": 7.198104935213223e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "auroc_sd",
+      "recomputed": 0.03131030230552794,
+      "archived": 0.0313139474752717,
+      "difference": -3.6451697437572816e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "brier",
+      "recomputed": 0.2006198803138611,
+      "archived": 0.2006209287954867,
+      "difference": -1.048481625604003e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "brier_sd",
+      "recomputed": 0.0229252570504979,
+      "archived": 0.022926660367427434,
+      "difference": -1.4033169295352144e-06,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "ece",
+      "recomputed": 0.17084821179873602,
+      "archived": 0.17086773594415444,
+      "difference": -1.952414541842029e-05,
+      "tolerance": 1e-06,
+      "matches": false
+    },
+    {
+      "model": "llama8b",
+      "table": "rq2_transfer",
+      "row": "in-domain probe on 50 agent steps",
+      "metric": "ece_sd",
+      "recomputed": 0.02500965189959352,
+      "archived": 0.025059364279494654,
+      "difference": -4.971237990113522e-05,
+      "tolerance": 1e-06,
+      "matches": false
+    }
+  ],
+  "seconds_by_model": {
+    "qwen7b": 26.186898299958557,
+    "llama8b": 28.709664599969983
+  },
+  "threads": 1,
+  "bootstrap_replicates": 2000,
+  "scope": "Archived inputs, selected probe fits, scalar metrics and selected paired intervals; not full end-to-end generation."
+}

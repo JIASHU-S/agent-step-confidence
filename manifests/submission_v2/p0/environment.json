@@ -1,0 +1,43 @@
+{
+  "python": "3.10.10 (tags/v3.10.10:aad5f6a, Feb  7 2023, 17:20:36) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "F:\\Jiashu\\llm-uq-project\\agent-conf\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.6",
+    "bitsandbytes": "0.50.2",
+    "datasets": "5.0.1",
+    "pymc": "5.25.1",
+    "arviz": "0.23.4",
+    "pytest": "9.1.1"
+  },
+  "git_head": {
+    "exit_code": 0,
+    "stdout": "02bd22c3b521e618628de4147cb0910041b5486d",
+    "stderr": ""
+  },
+  "git_status": {
+    "exit_code": 0,
+    "stdout": "M .gitignore\n?? agentconf/asset_audit.py\n?? configs/\n?? manifests/\n?? protocols/\n?? results/submission_v2/\n?? scripts/10_p0_audit.py\n?? scripts/11_p0_reproduce.py\n?? scripts/12_p0_costs.py\n?? scripts/13_p0_numerics.py\n?? scripts/14_p0_datasets.py\n?? tests/test_asset_audit.py",
+    "stderr": ""
+  },
+  "gpu": {
+    "exit_code": 0,
+    "stdout": "NVIDIA GeForce RTX 4070 Ti, 12282 MiB, 2071 MiB, 610.47",
+    "stderr": ""
+  },
+  "local_required_model_snapshots": {
+    "qwen7b": [],
+    "llama8b": []
+  },
+  "cache_roots_checked": [
+    "F:\\Jiashu\\llm-uq-project\\agent-conf\\.cache\\huggingface\\hub",
+    "C:\\Users\\Sjs\\.cache\\huggingface\\hub"
+  ],
+  "dataset_provenance_source": "reproducibility/environment.json",
+  "dataset_verification": "manifests\\submission_v2\\p0\\dataset_verification.json",
+  "fresh_gpu_timing_status": "pending: no required model snapshot in checked caches"
+}

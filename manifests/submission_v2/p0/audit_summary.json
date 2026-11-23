@@ -1,0 +1,522 @@
+{
+  "qwen7b": {
+    "errors": [],
+    "warnings": [
+      "Original model/tokenizer/dataset revisions are not pinned in run metadata.",
+      "Feature validity is structural only; prefix causality and Search gold-label validity remain P1 checks."
+    ],
+    "episodes": 900,
+    "steps": 2744,
+    "test_steps": 902,
+    "test_finished": 286,
+    "test_successes": 182,
+    "trivia_records": 2000,
+    "trivia_checkpoints_equal_aggregate": 2000,
+    "missing_raw_signals": {
+      "lp_mean": 0,
+      "lp_min": 0,
+      "consistency": 0,
+      "verbalized": 0
+    },
+    "normalized_exact_cross_task_overlap_ids": [],
+    "near_duplicate_screening": "not performed; exact normalized strings only",
+    "export_copy_checks": [
+      {
+        "file": "position_baseline.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "position_baseline.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "position_rq3.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "position_rq3.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "position_strata.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "position_strata.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_integrity.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_integrity.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_layers.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_layers.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_verify.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_verify.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "probe_choice.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "probe_choice.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_handoff_bands.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_handoff_bands.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_lenient_rq1.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_lenient_rq1.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq1_bootstrap.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq1_bootstrap.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq3.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq3.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_bootstrap.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_bootstrap.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_layers.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_layers.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_signals.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_signals.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_layers.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_layers.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_transfer.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_transfer.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_episodes.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_episodes.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_handoff.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_handoff.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_loo.json",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_loo.json",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_params.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_params.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_trajectory.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_trajectory.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "step_scores.csv",
+        "copy": "agent-conf\\results\\qwen7b",
+        "status": "identical"
+      },
+      {
+        "file": "step_scores.csv",
+        "copy": "results-qwen7b",
+        "status": "identical"
+      }
+    ],
+    "pipeline_completed_stages": [
+      "01_agent",
+      "02_trivia",
+      "03_signals",
+      "04_trajectory",
+      "05_figures"
+    ],
+    "canonical_legacy_result": "agent-conf\\runs\\qwen7b\\results",
+    "seconds": 14.221161599969491
+  },
+  "llama8b": {
+    "errors": [],
+    "warnings": [
+      "Original model/tokenizer/dataset revisions are not pinned in run metadata.",
+      "Feature validity is structural only; prefix causality and Search gold-label validity remain P1 checks."
+    ],
+    "episodes": 900,
+    "steps": 3077,
+    "test_steps": 1028,
+    "test_finished": 269,
+    "test_successes": 210,
+    "trivia_records": 2000,
+    "trivia_checkpoints_equal_aggregate": 2000,
+    "missing_raw_signals": {
+      "lp_mean": 0,
+      "lp_min": 0,
+      "consistency": 0,
+      "verbalized": 0
+    },
+    "normalized_exact_cross_task_overlap_ids": [],
+    "near_duplicate_screening": "not performed; exact normalized strings only",
+    "export_copy_checks": [
+      {
+        "file": "position_baseline.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "position_baseline.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "position_rq3.json",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "position_rq3.json",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "position_strata.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "position_strata.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_layers.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "preaction_layers.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "probe_choice.json",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "probe_choice.json",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_handoff_bands.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_handoff_bands.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_lenient_rq1.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_lenient_rq1.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq1_bootstrap.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq1_bootstrap.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq3.json",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "robust_rq3.json",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_bootstrap.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_bootstrap.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_layers.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_layers.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_signals.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq1_signals.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_layers.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_layers.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_transfer.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq2_transfer.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_episodes.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_episodes.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_handoff.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_handoff.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_loo.json",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_loo.json",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_params.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_params.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_trajectory.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "rq3_trajectory.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "step_scores.csv",
+        "copy": "agent-conf\\results\\llama8b",
+        "status": "identical"
+      },
+      {
+        "file": "step_scores.csv",
+        "copy": "results-llama8b",
+        "status": "identical"
+      }
+    ],
+    "pipeline_completed_stages": [
+      "01_agent",
+      "02_trivia",
+      "03_signals",
+      "04_trajectory",
+      "05_figures",
+      "06_robustness",
+      "07_preaction",
+      "08_preaction_analysis"
+    ],
+    "canonical_legacy_result": "agent-conf\\runs\\llama8b\\results",
+    "seconds": 16.191697300004307
+  },
+  "cross_model": {
+    "same_agent_split": true,
+    "same_trivia_source_split": true
+  },
+  "audit": {
+    "created_utc": "2026-10-28T19:17:15.652179+00:00",
+    "files_hashed": 7821,
+    "total_bytes_hashed": 2286798175,
+    "seconds": 30.62690669996664,
+    "raw_inputs_modified": false
+  }
+}

@@ -1,0 +1,343 @@
+model,table,row,metric,recomputed,archived,difference,tolerance,matches
+qwen7b,rq1_signals,probe/all,auroc,0.8345412279502256,0.8345412279502256,0.0,1e-08,True
+qwen7b,rq1_signals,probe/all,brier,0.1488986057791464,0.1488986057791464,0.0,1e-08,True
+qwen7b,rq1_signals,probe/all,ece,0.03177401336014658,0.03177401336014658,0.0,1e-08,True
+qwen7b,rq1_signals,probe/all,n,902.0,902.0,0.0,1e-08,True
+qwen7b,rq1_signals,probe/all,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Search,auroc,0.8705020387359836,0.8705020387359836,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Search,brier,0.12865563325173804,0.12865563325173804,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Search,ece,0.03833044691634956,0.03833044691634956,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Search,n,616.0,616.0,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Search,base_rate,0.7077922077922078,0.7077922077922078,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Finish,auroc,0.7391694843617921,0.7391694843617921,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Finish,brier,0.1924988542997183,0.1924988542997183,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Finish,ece,0.03276655147506346,0.03276655147506346,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Finish,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq1_signals,probe/Finish,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/all,auroc,0.5562468663111354,0.5562468663111354,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/all,brier,0.21534661161149687,0.21534661161149687,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/all,ece,0.052900798580828,0.052900798580828,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/all,n,902.0,902.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/all,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Search,auroc,0.5829128440366972,0.5829128440366972,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Search,brier,0.2057533275378401,0.2057533275378401,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Search,ece,0.09418758957152656,0.09418758957152656,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Search,n,616.0,616.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Search,base_rate,0.7077922077922078,0.7077922077922078,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Finish,auroc,0.6513102282333052,0.6513102282333052,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Finish,brier,0.23600906961629603,0.23600906961629603,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Finish,ece,0.08001481380003928,0.08001481380003928,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Finish,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_mean/Finish,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/all,auroc,0.5508056429190027,0.5508056429190027,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/all,brier,0.2147307372263606,0.2147307372263606,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/all,ece,0.013863425137352347,0.013863425137352347,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/all,n,902.0,902.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/all,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Search,auroc,0.587079510703364,0.587079510703364,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Search,brier,0.2043466939893079,0.2043466939893079,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Search,ece,0.057490799766393284,0.057490799766393284,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Search,n,616.0,616.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Search,base_rate,0.7077922077922078,0.7077922077922078,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Finish,auroc,0.6410080304311073,0.6410080304311073,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Finish,brier,0.23709636881385865,0.23709636881385865,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Finish,ece,0.08079836911294581,0.08079836911294581,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Finish,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq1_signals,lp_min/Finish,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/all,auroc,0.7324456447422398,0.7324456447422398,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/all,brier,0.18231771718627143,0.18231771718627143,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/all,ece,0.035532219053691964,0.035532219053691964,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/all,n,902.0,902.0,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/all,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Search,auroc,0.7511213047910297,0.7511213047910297,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Search,brier,0.1716862344299238,0.1716862344299238,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Search,ece,0.05048994495133948,0.05048994495133948,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Search,n,616.0,616.0,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Search,base_rate,0.7077922077922078,0.7077922077922078,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Finish,auroc,0.698806001690617,0.698806001690617,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Finish,brier,0.20521629543071257,0.20521629543071257,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Finish,ece,0.08944534007878213,0.08944534007878213,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Finish,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq1_signals,consistency/Finish,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/all,auroc,0.5889226947445189,0.5889226947445189,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/all,brier,0.20857737574252252,0.20857737574252252,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/all,ece,0.02360176786232561,0.02360176786232561,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/all,n,902.0,902.0,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/all,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Search,auroc,0.6326452599388379,0.6326452599388379,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Search,brier,0.19910591461511615,0.19910591461511615,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Search,ece,0.0499591136127078,0.0499591136127078,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Search,n,616.0,616.0,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Search,base_rate,0.7077922077922078,0.7077922077922078,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Finish,auroc,0.6476384192730348,0.6476384192730348,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Finish,brier,0.2289774458630901,0.2289774458630901,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Finish,ece,0.0757895820090298,0.0757895820090298,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Finish,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq1_signals,verbalized/Finish,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,selected_probe_refit,action,auroc,0.8345412279502256,0.8345412279502256,0.0,1e-06,True
+qwen7b,selected_probe_refit,action,brier,0.148898603003118,0.1488986057791464,-2.776028407147635e-09,1e-06,True
+qwen7b,selected_probe_refit,action,ece,0.031773997323568344,0.03177401336014658,-1.603657823895377e-08,1e-06,True
+qwen7b,selected_probe_refit,action,n,902.0,902.0,0.0,1e-06,True
+qwen7b,selected_probe_refit,action,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,preaction_refit,pre_step,auroc,0.7782430830940336,0.7782430830940336,0.0,1e-06,True
+qwen7b,preaction_refit,pre_step,brier,0.1683445321212052,0.16834445957463223,7.254657297117717e-08,1e-06,True
+qwen7b,preaction_refit,pre_step,ece,0.024723053873840536,0.024722912786355734,1.4108748480276545e-07,1e-06,True
+qwen7b,preaction_refit,pre_step,n,902.0,902.0,0.0,1e-06,True
+qwen7b,preaction_refit,pre_step,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,preaction_refit,pre_action,auroc,0.7884304207119741,0.7884304207119741,0.0,1e-06,True
+qwen7b,preaction_refit,pre_action,brier,0.16409707168247298,0.16409705610469552,1.5577777456865505e-08,1e-06,True
+qwen7b,preaction_refit,pre_action,ece,0.0416664470610782,0.04166643354280743,1.3518270773615892e-08,1e-06,True
+qwen7b,preaction_refit,pre_action,n,902.0,902.0,0.0,1e-06,True
+qwen7b,preaction_refit,pre_action,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,position_baseline,step index,auroc,0.6960093896713615,0.6960093896713615,0.0,1e-06,True
+qwen7b,position_baseline,step index,brier,0.1879756487805725,0.1879756487805725,0.0,1e-06,True
+qwen7b,position_baseline,step index,ece,0.015762380566092145,0.015762380566092114,3.122502256758253e-17,1e-06,True
+qwen7b,position_baseline,step index,n,902.0,902.0,0.0,1e-06,True
+qwen7b,position_baseline,step index,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type,auroc,0.6928158758375497,0.6928158758375497,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type,brier,0.18618568101666272,0.1861856810166627,2.7755575615628914e-17,1e-06,True
+qwen7b,position_baseline,step index + action type,ece,0.09590067094444821,0.09590067094444839,-1.8041124150158794e-16,1e-06,True
+qwen7b,position_baseline,step index + action type,n,902.0,902.0,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,position_baseline,step index + probe before step,auroc,0.775103696613337,0.7750979989972195,5.697616117461557e-06,1e-06,False
+qwen7b,position_baseline,step index + probe before step,brier,0.16926252797909333,0.1692624942516881,3.3727405229777574e-08,1e-06,True
+qwen7b,position_baseline,step index + probe before step,ece,0.03176880014108126,0.03176891143339245,-1.112923111931674e-07,1e-06,True
+qwen7b,position_baseline,step index + probe before step,n,902.0,902.0,0.0,1e-06,True
+qwen7b,position_baseline,step index + probe before step,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type + probe,auroc,0.8335498427457951,0.8335498427457951,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type + probe,brier,0.14836944176831293,0.14836944176831296,-2.7755575615628914e-17,1e-06,True
+qwen7b,position_baseline,step index + action type + probe,ece,0.03535323026124635,0.035353230261246385,-3.469446951953614e-17,1e-06,True
+qwen7b,position_baseline,step index + action type + probe,n,902.0,902.0,0.0,1e-06,True
+qwen7b,position_baseline,step index + action type + probe,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,rq2_transfer,legacy zero-shot,auroc,0.7165720862391176,0.716577783855235,-5.697616117350535e-06,1e-06,False
+qwen7b,rq2_transfer,legacy zero-shot,brier,0.4179592006255619,0.4179573413433753,1.859282186600364e-06,1e-06,False
+qwen7b,rq2_transfer,legacy zero-shot,ece,0.470990412167913,0.47098859538140836,1.8167865046270215e-06,1e-06,False
+qwen7b,rq2_transfer,legacy zero-shot,n,902.0,902.0,0.0,1e-06,True
+qwen7b,rq2_transfer,legacy zero-shot,base_rate,0.6851441241685144,0.6851441241685144,0.0,1e-06,True
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,auroc,0.7165720862391177,0.7165777838552352,-5.697616117461557e-06,1e-06,False
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,auroc_sd,1.1102230246251565e-16,2.220446049250313e-16,-1.1102230246251565e-16,1e-06,True
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,brier,0.20145391916157757,0.20145375225460738,1.6690697018928446e-07,1e-06,True
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,brier_sd,0.015054241519412913,0.01505423632977362,5.189639292954573e-09,1e-06,True
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,ece,0.09343567752260433,0.09343553577066664,1.4175193768783956e-07,1e-06,True
+qwen7b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,ece_sd,0.03055642807347831,0.03055646730242722,-3.922894890873163e-08,1e-06,True
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,auroc,0.7313656616071836,0.7313576849446192,7.976662564468384e-06,1e-06,False
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,auroc_sd,0.04299852923626047,0.04302418074312662,-2.565150686614781e-05,1e-06,False
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,brier,0.22511977322133428,0.22511968207990404,9.114143023625232e-08,1e-06,True
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,brier_sd,0.025531047006560798,0.025531714238192865,-6.67231632067028e-07,1e-06,True
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,ece,0.19775008877004974,0.19774997630320734,1.1246684239463178e-07,1e-06,True
+qwen7b,rq2_transfer,in-domain probe on 50 agent steps,ece_sd,0.031899559052346094,0.03189935409665505,2.0495569104383993e-07,1e-06,True
+qwen7b,episode_bootstrap,lp_mean,bootstrap_mean,-0.2788148180569126,-0.2788148180569126,0.0,1e-08,True
+qwen7b,episode_bootstrap,lp_mean,ci_low,-0.32229406208591393,-0.32229406208591393,0.0,1e-08,True
+qwen7b,episode_bootstrap,lp_mean,ci_high,-0.23673598690931935,-0.23673598690931935,0.0,1e-08,True
+qwen7b,episode_bootstrap,lp_min,bootstrap_mean,-0.2844568870281098,-0.2844568870281098,0.0,1e-08,True
+qwen7b,episode_bootstrap,lp_min,ci_low,-0.3295266016867847,-0.32952660168678466,-5.551115123125783e-17,1e-08,True
+qwen7b,episode_bootstrap,lp_min,ci_high,-0.240557326253554,-0.24055732625355397,-2.7755575615628914e-17,1e-08,True
+qwen7b,episode_bootstrap,consistency,bootstrap_mean,-0.1017068803847279,-0.1017068803847279,0.0,1e-08,True
+qwen7b,episode_bootstrap,consistency,ci_low,-0.13589159380010812,-0.13589159380010812,0.0,1e-08,True
+qwen7b,episode_bootstrap,consistency,ci_high,-0.06685183835488509,-0.06685183835488508,-1.3877787807814457e-17,1e-08,True
+qwen7b,episode_bootstrap,verbalized,bootstrap_mean,-0.2465214103221782,-0.2465214103221782,0.0,1e-08,True
+qwen7b,episode_bootstrap,verbalized,ci_low,-0.29830078515385294,-0.2983007851538529,-5.551115123125783e-17,1e-08,True
+qwen7b,episode_bootstrap,verbalized,ci_high,-0.19690928882627345,-0.19690928882627343,-2.7755575615628914e-17,1e-08,True
+qwen7b,rq3_trajectory,M0_last,auroc,0.7391694843617921,0.7391694843617921,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_last,brier,0.19157552364140334,0.19157552364140334,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_last,ece,0.057279111686302404,0.057279111686302404,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_last,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_last,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_min,auroc,0.702187235841082,0.702187235841082,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_min,brier,0.21226812738473305,0.21226812738473305,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_min,ece,0.08167328974298926,0.08167328974298926,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_min,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_min,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_product,auroc,0.6642540152155536,0.6642540152155536,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_product,brier,0.260281183621923,0.260281183621923,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_product,ece,0.20009997675163546,0.20009997675163546,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_product,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq3_trajectory,M0_product,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,rq3_trajectory,M1_forward,auroc,0.735101437024514,0.735101437024514,0.0,1e-08,True
+qwen7b,rq3_trajectory,M1_forward,brier,0.19316164037542158,0.19316164037542158,0.0,1e-08,True
+qwen7b,rq3_trajectory,M1_forward,ece,0.027222854433904188,0.027222854433904188,0.0,1e-08,True
+qwen7b,rq3_trajectory,M1_forward,n,286.0,286.0,0.0,1e-08,True
+qwen7b,rq3_trajectory,M1_forward,base_rate,0.6363636363636364,0.6363636363636364,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,aurc_M0_minus_M1,mean,0.01872935813890557,0.01872935813890557,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,aurc_M0_minus_M1,ci_low,-0.0030860639669897825,-0.0030860639669897825,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,aurc_M0_minus_M1,ci_high,0.04102256314986731,0.04102256314986731,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_product_minus_forward,mean,0.14174628130801706,0.14174628130801706,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_product_minus_forward,ci_low,0.08235609240380837,0.08235609240380837,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_product_minus_forward,ci_high,0.18602478546380352,0.18602478546380352,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,auroc_forward_minus_last,mean,-0.004270803646155124,-0.004270803646155124,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,auroc_forward_minus_last,ci_low,-0.017202786573393837,-0.017202786573393837,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,auroc_forward_minus_last,ci_high,0.008559388653515106,0.008559388653515106,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_last_minus_forward,mean,0.012071065085095733,0.012071065085095733,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_last_minus_forward,ci_low,-0.029687476336493667,-0.029687476336493667,0.0,1e-08,True
+qwen7b,trajectory_bootstrap,ece_last_minus_forward,ci_high,0.055006484444372075,0.055006484444372075,0.0,1e-08,True
+llama8b,rq1_signals,probe/all,auroc,0.8784000139599611,0.8784000139599611,0.0,1e-08,True
+llama8b,rq1_signals,probe/all,brier,0.1277113023042753,0.1277113023042753,0.0,1e-08,True
+llama8b,rq1_signals,probe/all,ece,0.025583931787124203,0.025583931787124203,0.0,1e-08,True
+llama8b,rq1_signals,probe/all,n,1028.0,1028.0,0.0,1e-08,True
+llama8b,rq1_signals,probe/all,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-08,True
+llama8b,rq1_signals,probe/Search,auroc,0.9158867098408049,0.9158867098408049,0.0,1e-08,True
+llama8b,rq1_signals,probe/Search,brier,0.1114410695915475,0.1114410695915475,0.0,1e-08,True
+llama8b,rq1_signals,probe/Search,ece,0.03134814042902389,0.03134814042902389,0.0,1e-08,True
+llama8b,rq1_signals,probe/Search,n,758.0,758.0,0.0,1e-08,True
+llama8b,rq1_signals,probe/Search,base_rate,0.6477572559366754,0.6477572559366754,0.0,1e-08,True
+llama8b,rq1_signals,probe/Finish,auroc,0.6758676351896692,0.6758676351896692,0.0,1e-08,True
+llama8b,rq1_signals,probe/Finish,brier,0.17403171450902918,0.17403171450902918,0.0,1e-08,True
+llama8b,rq1_signals,probe/Finish,ece,0.08834816298602993,0.08834816298602993,0.0,1e-08,True
+llama8b,rq1_signals,probe/Finish,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq1_signals,probe/Finish,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/all,auroc,0.49634205394652464,0.49634205394652464,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/all,brier,0.21713622630889584,0.21713622630889584,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/all,ece,0.009560775455473958,0.009560775455473958,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/all,n,1028.0,1028.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/all,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Search,auroc,0.37837631677307637,0.37837631677307637,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Search,brier,0.22811291729892444,0.22811291729892444,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Search,ece,0.027872153018951518,0.027872153018951518,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Search,n,758.0,758.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Search,base_rate,0.6477572559366754,0.6477572559366754,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Finish,auroc,0.6129943502824858,0.6129943502824858,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Finish,brier,0.18535410497247914,0.18535410497247914,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Finish,ece,0.11755965621202569,0.11755965621202569,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Finish,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_mean/Finish,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/all,auroc,0.4469848665296845,0.4469848665296845,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/all,brier,0.21702665003169197,0.21702665003169197,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/all,ece,0.0986338899171703,0.0986338899171703,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/all,n,1028.0,1028.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/all,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Search,auroc,0.29782527441512774,0.29782527441512774,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Search,brier,0.2214209294600867,0.2214209294600867,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Search,ece,0.1229944914963143,0.1229944914963143,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Search,n,758.0,758.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Search,base_rate,0.6477572559366754,0.6477572559366754,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Finish,auroc,0.5788539144471347,0.5788539144471347,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Finish,brier,0.2039195298207717,0.2039195298207717,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Finish,ece,0.1780144597058591,0.1780144597058591,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Finish,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq1_signals,lp_min/Finish,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq1_signals,consistency/all,auroc,0.7727558271931319,0.7727558271931319,0.0,1e-08,True
+llama8b,rq1_signals,consistency/all,brier,0.17805298090527877,0.17805298090527877,0.0,1e-08,True
+llama8b,rq1_signals,consistency/all,ece,0.07482298873086977,0.07482298873086977,0.0,1e-08,True
+llama8b,rq1_signals,consistency/all,n,1028.0,1028.0,0.0,1e-08,True
+llama8b,rq1_signals,consistency/all,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Search,auroc,0.8031839019962318,0.8031839019962318,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Search,brier,0.17539146799778743,0.17539146799778743,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Search,ece,0.0932808949150369,0.0932808949150369,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Search,n,758.0,758.0,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Search,base_rate,0.6477572559366754,0.6477572559366754,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Finish,auroc,0.6915254237288135,0.6915254237288135,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Finish,brier,0.18607408058253969,0.18607408058253969,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Finish,ece,0.12307010151648436,0.12307010151648436,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Finish,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq1_signals,consistency/Finish,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/all,auroc,0.7014727758946372,0.7014727758946372,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/all,brier,0.18703887389248544,0.18703887389248544,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/all,ece,0.040564194992653534,0.040564194992653534,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/all,n,1028.0,1028.0,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/all,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Search,auroc,0.7006910913293211,0.7006910913293211,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Search,brier,0.19613093859826364,0.19613093859826364,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Search,ece,0.03979273094798332,0.03979273094798332,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Search,n,758.0,758.0,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Search,base_rate,0.6477572559366754,0.6477572559366754,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Finish,auroc,0.6244148506860371,0.6244148506860371,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Finish,brier,0.16146380327789708,0.16146380327789708,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Finish,ece,0.04172982994218894,0.04172982994218894,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Finish,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq1_signals,verbalized/Finish,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,selected_probe_refit,action,auroc,0.878391288984282,0.8784000139599611,-8.724975679164082e-06,1e-06,False
+llama8b,selected_probe_refit,action,brier,0.12771052447801134,0.1277113023042753,-7.778262639535072e-07,1e-06,True
+llama8b,selected_probe_refit,action,ece,0.02558855647619232,0.025583931787124203,4.62468906811675e-06,1e-06,False
+llama8b,selected_probe_refit,action,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,selected_probe_refit,action,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,preaction_refit,pre_step,auroc,0.7948976342228447,0.7948976342228447,0.0,1e-06,True
+llama8b,preaction_refit,pre_step,brier,0.16362831005634287,0.16362834704252308,-3.6986180201870056e-08,1e-06,True
+llama8b,preaction_refit,pre_step,ece,0.04576805680135829,0.04576807988225023,-2.3080891940752135e-08,1e-06,True
+llama8b,preaction_refit,pre_step,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,preaction_refit,pre_step,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,preaction_refit,pre_action,auroc,0.7914163689268716,0.7914250939025507,-8.72497567905306e-06,1e-06,False
+llama8b,preaction_refit,pre_action,brier,0.1658650833108155,0.16587051911943834,-5.435808622833438e-06,1e-06,False
+llama8b,preaction_refit,pre_action,ece,0.05319530145609072,0.053196029886956965,-7.284308662439121e-07,1e-06,True
+llama8b,preaction_refit,pre_action,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,preaction_refit,pre_action,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,position_baseline,step index,auroc,0.6747612628529798,0.6747612628529798,0.0,1e-06,True
+llama8b,position_baseline,step index,brier,0.19051828934668197,0.1905182893466828,-8.326672684688674e-16,1e-06,True
+llama8b,position_baseline,step index,ece,0.04248785683764243,0.04248785683764446,-2.0261570199409107e-15,1e-06,True
+llama8b,position_baseline,step index,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,position_baseline,step index,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,position_baseline,step index + action type,auroc,0.6858092633066785,0.6858092633066785,0.0,1e-06,True
+llama8b,position_baseline,step index + action type,brier,0.17732741140461666,0.1773274114045578,5.886957588074893e-14,1e-06,True
+llama8b,position_baseline,step index + action type,ece,0.05242079996602144,0.05242079996601319,8.250344851745695e-15,1e-06,True
+llama8b,position_baseline,step index + action type,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,position_baseline,step index + action type,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,position_baseline,step index + probe before step,auroc,0.7903431969183387,0.7903431969183387,0.0,1e-06,True
+llama8b,position_baseline,step index + probe before step,brier,0.16403373750137173,0.1640344056127141,-6.681113423612217e-07,1e-06,True
+llama8b,position_baseline,step index + probe before step,ece,0.03839817741208051,0.03840198823651174,-3.810824431231541e-06,1e-06,False
+llama8b,position_baseline,step index + probe before step,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,position_baseline,step index + probe before step,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,position_baseline,step index + action type + probe,auroc,0.87670736867821,0.87670736867821,0.0,1e-06,True
+llama8b,position_baseline,step index + action type + probe,brier,0.12791701284349336,0.12791701284348972,3.635980405647388e-15,1e-06,True
+llama8b,position_baseline,step index + action type + probe,ece,0.02779181235698258,0.027791812356960884,2.1697921237517903e-14,1e-06,True
+llama8b,position_baseline,step index + action type + probe,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,position_baseline,step index + action type + probe,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,rq2_transfer,legacy zero-shot,auroc,0.7272921601731035,0.7272921601731035,0.0,1e-06,True
+llama8b,rq2_transfer,legacy zero-shot,brier,0.2509382507859287,0.25093828393553375,-3.314960506095588e-08,1e-06,True
+llama8b,rq2_transfer,legacy zero-shot,ece,0.24840305537806054,0.24840312414578392,-6.876772337682802e-08,1e-06,True
+llama8b,rq2_transfer,legacy zero-shot,n,1028.0,1028.0,0.0,1e-06,True
+llama8b,rq2_transfer,legacy zero-shot,base_rate,0.6819066147859922,0.6819066147859922,0.0,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,auroc,0.7272921601731035,0.7272921601731035,0.0,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,auroc_sd,0.0,0.0,0.0,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,brier,0.1996045775224465,0.19960456860101836,8.92142815178687e-09,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,brier_sd,0.013783529840704611,0.013783528394893343,1.4458112675835855e-09,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,ece,0.1218971462222922,0.12189714221998735,4.002304848649274e-09,1e-06,True
+llama8b,rq2_transfer,TriviaQA probe + Platt on 50 agent steps,ece_sd,0.03400437549741524,0.03400436156953577,1.3927879467801052e-08,1e-06,True
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,auroc,0.7788209940364791,0.7788137959315439,7.198104935213223e-06,1e-06,False
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,auroc_sd,0.03131030230552794,0.0313139474752717,-3.6451697437572816e-06,1e-06,False
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,brier,0.2006198803138611,0.2006209287954867,-1.048481625604003e-06,1e-06,False
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,brier_sd,0.0229252570504979,0.022926660367427434,-1.4033169295352144e-06,1e-06,False
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,ece,0.17084821179873602,0.17086773594415444,-1.952414541842029e-05,1e-06,False
+llama8b,rq2_transfer,in-domain probe on 50 agent steps,ece_sd,0.02500965189959352,0.025059364279494654,-4.971237990113522e-05,1e-06,False
+llama8b,episode_bootstrap,lp_mean,bootstrap_mean,-0.38283058396317665,-0.38283058396317665,0.0,1e-08,True
+llama8b,episode_bootstrap,lp_mean,ci_low,-0.4208620234822106,-0.4208620234822105,-5.551115123125783e-17,1e-08,True
+llama8b,episode_bootstrap,lp_mean,ci_high,-0.3434863551748915,-0.3434863551748915,0.0,1e-08,True
+llama8b,episode_bootstrap,lp_min,bootstrap_mean,-0.4321690964206094,-0.4321690964206094,0.0,1e-08,True
+llama8b,episode_bootstrap,lp_min,ci_low,-0.4708717262274865,-0.47087172622748646,-5.551115123125783e-17,1e-08,True
+llama8b,episode_bootstrap,lp_min,ci_high,-0.3909928333711449,-0.3909928333711449,0.0,1e-08,True
+llama8b,episode_bootstrap,consistency,bootstrap_mean,-0.1053770754416817,-0.1053770754416817,0.0,1e-08,True
+llama8b,episode_bootstrap,consistency,ci_low,-0.13955682431270458,-0.13955682431270458,0.0,1e-08,True
+llama8b,episode_bootstrap,consistency,ci_high,-0.07071140040994511,-0.07071140040994507,-4.163336342344337e-17,1e-08,True
+llama8b,episode_bootstrap,verbalized,bootstrap_mean,-0.17705490231392973,-0.17705490231392973,0.0,1e-08,True
+llama8b,episode_bootstrap,verbalized,ci_low,-0.2118397478488033,-0.2118397478488032,-1.1102230246251565e-16,1e-08,True
+llama8b,episode_bootstrap,verbalized,ci_high,-0.14290636713109853,-0.1429063671310985,-2.7755575615628914e-17,1e-08,True
+llama8b,rq3_trajectory,M0_last,auroc,0.6758676351896692,0.6758676351896692,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_last,brier,0.17012024304571793,0.17012024304571793,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_last,ece,0.09574378815492784,0.09574378815492784,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_last,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_last,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_min,auroc,0.6592413236481033,0.6592413236481033,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_min,brier,0.2302005610585038,0.2302005610585038,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_min,ece,0.20553598748256208,0.20553598748256208,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_min,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_min,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_product,auroc,0.6418079096045197,0.6418079096045197,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_product,brier,0.2988129369589962,0.2988129369589962,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_product,ece,0.3260789357881457,0.3260789357881457,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_product,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq3_trajectory,M0_product,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,rq3_trajectory,M1_forward,auroc,0.6820016142050042,0.6820016142050042,0.0,1e-08,True
+llama8b,rq3_trajectory,M1_forward,brier,0.1704015190470454,0.1704015190470454,0.0,1e-08,True
+llama8b,rq3_trajectory,M1_forward,ece,0.10406910810059042,0.10406910810059042,0.0,1e-08,True
+llama8b,rq3_trajectory,M1_forward,n,269.0,269.0,0.0,1e-08,True
+llama8b,rq3_trajectory,M1_forward,base_rate,0.7806691449814126,0.7806691449814126,0.0,1e-08,True
+llama8b,trajectory_bootstrap,aurc_M0_minus_M1,mean,0.005441152919880349,0.005441152919880349,0.0,1e-08,True
+llama8b,trajectory_bootstrap,aurc_M0_minus_M1,ci_low,-0.009704595995298668,-0.009704595995298668,0.0,1e-08,True
+llama8b,trajectory_bootstrap,aurc_M0_minus_M1,ci_high,0.01978846345794958,0.01978846345794958,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_product_minus_forward,mean,0.2178134437437056,0.2178134437437056,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_product_minus_forward,ci_low,0.18893458538564348,0.18893458538564348,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_product_minus_forward,ci_high,0.24380675293883974,0.24380675293883974,0.0,1e-08,True
+llama8b,trajectory_bootstrap,auroc_forward_minus_last,mean,0.006024985285749867,0.006024985285749867,0.0,1e-08,True
+llama8b,trajectory_bootstrap,auroc_forward_minus_last,ci_low,-0.015366638602891749,-0.015366638602891749,0.0,1e-08,True
+llama8b,trajectory_bootstrap,auroc_forward_minus_last,ci_high,0.02754244248142981,0.02754244248142981,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_last_minus_forward,mean,-0.0022906046243363447,-0.0022906046243363447,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_last_minus_forward,ci_low,-0.023718138477985276,-0.023718138477985276,0.0,1e-08,True
+llama8b,trajectory_bootstrap,ece_last_minus_forward,ci_high,0.032604974640544085,0.032604974640544085,0.0,1e-08,True

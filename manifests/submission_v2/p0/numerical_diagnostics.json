@@ -1,0 +1,52 @@
+{
+  "verified_legacy_reproduction": "results/submission_v2/p0_threads16",
+  "runs": [
+    {
+      "path": "results\\submission_v2\\p0",
+      "threads": 4,
+      "comparisons": 342,
+      "matches": 331,
+      "max_absolute_metric_difference": 2.1812439197854694e-05,
+      "all_equal_at_three_decimal_places": true
+    },
+    {
+      "path": "results\\submission_v2\\p0_threads1",
+      "threads": 1,
+      "comparisons": 342,
+      "matches": 324,
+      "max_absolute_metric_difference": 4.971237990113522e-05,
+      "all_equal_at_three_decimal_places": true
+    },
+    {
+      "path": "results\\submission_v2\\p0_threads16",
+      "threads": 16,
+      "comparisons": 342,
+      "matches": 342,
+      "max_absolute_metric_difference": 1.1102230246251565e-16,
+      "all_equal_at_three_decimal_places": true
+    }
+  ],
+  "current_native_backend": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 16,
+      "prefix": "libopenblas",
+      "filepath": "F:\\Jiashu\\llm-uq-project\\agent-conf\\.venv\\Lib\\site-packages\\numpy.libs\\libopenblas64__v0.3.23-293-gc2f4bdbb-gcc_10_3_0-2bde3a66a51006b2b53eb373ff767a3f.dll",
+      "version": "0.3.23.dev",
+      "threading_layer": "pthreads",
+      "architecture": "Cooperlake"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 16,
+      "prefix": "libscipy_openblas",
+      "filepath": "F:\\Jiashu\\llm-uq-project\\agent-conf\\.venv\\Lib\\site-packages\\scipy.libs\\libscipy_openblas-f07f5a5d207a3a47104dca54d6d0c86a.dll",
+      "version": "0.3.28",
+      "threading_layer": "pthreads",
+      "architecture": "SkylakeX"
+    }
+  ],
+  "interpretation": "Thread-sensitive refits; 16 threads recovered archived metrics within unchanged tolerances. This does not establish bitwise reproducibility on other platforms or prove historical thread settings."
+}

@@ -1,0 +1,50 @@
+{
+  "source": "User-supplied reproducibility/environment.json; pinned public files verified locally",
+  "datasets": {
+    "hotpotqa": {
+      "repo": "hotpotqa/hotpot_qa",
+      "config": "distractor",
+      "split": "validation",
+      "revision": "1908d6afbbead072334abe2965f91bd2709910ab",
+      "file": "distractor/validation-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/hotpotqa/hotpot_qa/resolve/1908d6afbbead072334abe2965f91bd2709910ab/distractor/validation-00000-of-00001.parquet",
+      "sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6",
+      "bytes": 27452575,
+      "upstream": "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json",
+      "used_for": "Agent episodes: 900 questions shuffled with seed 0; first 600 train, next 300 test (agentconf/data.py load_hotpot)",
+      "local_path": "data/submission_v2/hotpotqa/1908d6afbbead072334abe2965f91bd2709910ab/validation-00000-of-00001.parquet",
+      "verified_sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6",
+      "rows": 7405
+    },
+    "triviaqa": {
+      "repo": "mandarjoshi/trivia_qa",
+      "config": "rc.nocontext",
+      "split": "validation",
+      "revision": "0f7faf33a3908546c6fd5b73a660e0f8ff173c2f",
+      "file": "rc.nocontext/validation-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/mandarjoshi/trivia_qa/resolve/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/rc.nocontext/validation-00000-of-00001.parquet",
+      "sha256": "48a5005c0eb4f8a4ae5b9868644297fd5bf1e694aeb3dc9c8ab958cac0d5b201",
+      "bytes": 7335321,
+      "upstream": "https://nlp.cs.washington.edu/triviaqa/data/triviaqa-rc.tar.gz",
+      "used_for": "RQ2 source domain: first row per question_id, unique questions shuffled with seed 0, 2000 selected (agentconf/data.py load_trivia)",
+      "local_path": "data/submission_v2/triviaqa/0f7faf33a3908546c6fd5b73a660e0f8ff173c2f/validation-00000-of-00001.parquet",
+      "verified_sha256": "48a5005c0eb4f8a4ae5b9868644297fd5bf1e694aeb3dc9c8ab958cac0d5b201",
+      "rows": 17944
+    }
+  },
+  "models": {
+    "qwen7b": {
+      "errors": [],
+      "episodes": 900,
+      "replayed_steps": 2744,
+      "trivia_questions": 2000
+    },
+    "llama8b": {
+      "errors": [],
+      "episodes": 900,
+      "replayed_steps": 3077,
+      "trivia_questions": 2000
+    }
+  },
+  "limitation": "Replay confirms dataset compatibility with saved actions/observations and operational labels; it does not prove feature causality, semantic label validity or historical weight revision."
+}

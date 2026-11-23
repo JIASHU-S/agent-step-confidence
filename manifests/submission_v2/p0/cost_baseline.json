@@ -1,0 +1,130 @@
+{
+  "basis": "historical logs, not a new GPU benchmark",
+  "models": {
+    "qwen7b": {
+      "last_logged_running_mean_seconds_per_episode": 52.3,
+      "completed_instrumented_episodes": 866,
+      "recent_completed_episode_sample": 100,
+      "recent_episode_elapsed_lower_bound_seconds": {
+        "n": 100,
+        "mean": 54.312,
+        "median": 48.25,
+        "p10": 33.1,
+        "p90": 92.38000000000017
+      },
+      "observed_phase_seconds": {
+        "greedy_generation": {
+          "n": 303,
+          "mean": 2.8745874587458746,
+          "median": 2.8000000000000007,
+          "p10": 2.3999999999999986,
+          "p90": 3.4000000000000017
+        },
+        "feature_extraction": {
+          "n": 303,
+          "mean": 0.3122112211221122,
+          "median": 0.30000000000000027,
+          "p10": 0.19999999999999973,
+          "p90": 0.5
+        },
+        "five_alternatives": {
+          "n": 303,
+          "mean": 14.51254125412541,
+          "median": 14.299999999999997,
+          "p10": 12.5,
+          "p90": 16.9
+        },
+        "verbal_prompt": {
+          "n": 203,
+          "mean": 0.3364532019704429,
+          "median": 0.3000000000000007,
+          "p10": 0.29999999999999716,
+          "p90": 0.4000000000000057
+        }
+      },
+      "limitations": [
+        "Phase timers rounded to 0.1s; final verbal call has no following phase timestamp.",
+        "Running mean belongs to the corresponding historical collection attempt; includes its historical conditions.",
+        "Bayesian log entries may include retries; not a current-machine benchmark."
+      ],
+      "last_logged_replay_seconds_per_episode": 1.3,
+      "logged_four_chain_sampling_seconds": [
+        1808.0,
+        2447.0
+      ]
+    },
+    "llama8b": {
+      "last_logged_running_mean_seconds_per_episode": 64.0,
+      "completed_instrumented_episodes": 900,
+      "recent_completed_episode_sample": 100,
+      "recent_episode_elapsed_lower_bound_seconds": {
+        "n": 100,
+        "mean": 61.477000000000004,
+        "median": 51.6,
+        "p10": 44.37,
+        "p90": 105.53000000000002
+      },
+      "observed_phase_seconds": {
+        "greedy_generation": {
+          "n": 352,
+          "mean": 2.652272727272727,
+          "median": 2.5999999999999988,
+          "p10": 2.200000000000003,
+          "p90": 3.1000000000000014
+        },
+        "feature_extraction": {
+          "n": 352,
+          "mean": 0.3801136363636361,
+          "median": 0.30000000000000426,
+          "p10": 0.29999999999999716,
+          "p90": 0.5
+        },
+        "five_alternatives": {
+          "n": 352,
+          "mean": 13.632670454545455,
+          "median": 13.399999999999999,
+          "p10": 11.700000000000003,
+          "p90": 15.880000000000006
+        },
+        "verbal_prompt": {
+          "n": 252,
+          "mean": 1.1174603174603177,
+          "median": 1.1000000000000014,
+          "p10": 1.0,
+          "p90": 1.2000000000000028
+        }
+      },
+      "limitations": [
+        "Phase timers rounded to 0.1s; final verbal call has no following phase timestamp.",
+        "Running mean belongs to the corresponding historical collection attempt; includes its historical conditions.",
+        "Bayesian log entries may include retries; not a current-machine benchmark."
+      ],
+      "last_logged_replay_seconds_per_episode": 1.3,
+      "logged_four_chain_sampling_seconds": [
+        1981.0,
+        2115.0,
+        2618.0
+      ]
+    }
+  },
+  "fresh_gpu_measurement": "pending restoration of pinned weights and exact dataset inputs",
+  "hotpot_1600_new_trajectories_planning_estimate": {
+    "episodes_per_model": 800,
+    "historical_collection_hours": 25.844444444444445,
+    "plus_25_percent_scheduling_margin_hours": 32.30555555555556,
+    "excluded": [
+      "model/data downloads",
+      "model load",
+      "second environment",
+      "human audit",
+      "Bayesian refitting"
+    ],
+    "not_an_empirical_runtime_guarantee": true
+  },
+  "twenty_bayesian_fits_rough_hours": {
+    "why_twenty": "2 models x 5 outer folds x 2 Bayesian models",
+    "historical_min_based": 10.044444444444444,
+    "historical_max_based": 14.544444444444444,
+    "excludes": "nested probe training, compile overhead, diagnostics and retries"
+  }
+}
