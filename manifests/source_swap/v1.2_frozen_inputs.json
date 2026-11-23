@@ -1,0 +1,82 @@
+{
+ "protocol": "source_swap_v1.2 (section 11)",
+ "heldout_manifest": {
+  "path": "manifests/heldout_v1/heldout_manifest.json",
+  "sha256": "0a782a753944a5c840c2e24d7940c85d893469152327edf28ea854c8c850074e"
+ },
+ "split": "final",
+ "output": "results/source_swap_confirmation.json",
+ "scoring": {
+  "pca": 64,
+  "n_boot": 2000,
+  "min_m": 300
+ },
+ "models": {
+  "runs/qwen7b": {
+   "target_run": "runs/qwen7b-final",
+   "model": "Qwen/Qwen2.5-7B-Instruct",
+   "layers": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+   ],
+   "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+   "files": {
+    "S0/trivia.jsonl": "08634f7a41a339d6b42b275eaee63741011d040e8e2833ef70d45678624abe8d",
+    "S0/trivia_feats.npz": "1aa95153bc7a8121e992015918bbd7aeb76564a29b616d816bc45b3552904fb3",
+    "C1/items.jsonl": "7141e4b16c82094f0bdf4439d9808da9fc8dc42cd3a24b8e97cee62a4d373199",
+    "C1/feats.npz": "a8b4239e823c783f9d5c29ead4ef5d0861c79e4b557056726f1f046402cd25a8",
+    "S2QA/items.jsonl": "c10a86f752dd7a2e266aefc1e4495ff11a826eaac5f6f4c93cc14cba273b5375",
+    "S2QA/feats.npz": "3c8dfd9cdee75ff6f2fd1ae62d1cfc869583112d13a57e1b9df5369d3321960d"
+   }
+  },
+  "runs/llama8b": {
+   "target_run": "runs/llama8b-final",
+   "model": "meta-llama/Llama-3.1-8B-Instruct",
+   "layers": [
+    0,
+    5,
+    9,
+    14,
+    18,
+    23,
+    27,
+    32
+   ],
+   "model_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+   "files": {
+    "S0/trivia.jsonl": "f4a044ef2a8794409086343601471a22a7b4edd361bf2d66ce62d88e40b2fdfb",
+    "S0/trivia_feats.npz": "9be9d73dc629ba84992dbf19d43d6797827f4e6e7650edbbf5495883a8022156",
+    "C1/items.jsonl": "134ec28f8dbf36d6a9dc79b00aae8036c224117e7f106c57e90465d5d374e888",
+    "C1/feats.npz": "14698006232b29f9886b048f85cfa560f66a9b18c5a7eeef134e5798eb8a0091",
+    "S2QA/items.jsonl": "3c2d585692610313bfe786fe88160aa14f5c5dfe5e3eb0fd17177010b47b720c",
+    "S2QA/feats.npz": "fa8847af3cb3f3b34faa473842e6454650c80046a468aedb65816575b5153fc9"
+   }
+  }
+ },
+ "code": {
+  "scripts/01_run_agent.py": "29dc4535dd47a756a14bf4ef3d31c01779274ccfbc841015ac03744bf1d3f5f5",
+  "scripts/20_source_swap.py": "db46e3cd20fe580fb221aa321c6e594275202639a77d58d50075f8c0b5d43d2a",
+  "scripts/21_select_heldout.py": "c93f37bf65cc5c1f39436eaabb36da2db09cb26b788e83388e4a1c928e7b19d0",
+  "scripts/22_confirm_source_swap.py": "c76ead8d1eb41d9f83f07fe8a0fca4ef80f8ba2c28514b2f063a32fa984ca164",
+  "agentconf/agent.py": "34b4cb305b3b5819d53b2981f953021d907c07614507c60b1eaa02968de74700",
+  "agentconf/checkpoints.py": "2896d857ffe8913cdd83bb3fbc78ab0385e66f7d073295d76f8b1cf9fb3f7750",
+  "agentconf/data.py": "bd700a8e82278d540d11d7959320c671c1fae28e522f5648322d4fdbcc8ba6e9",
+  "agentconf/env.py": "e10b295d2ee95f37151f843a20d5ea934880c443a4499fa77c03ee9c97a737de",
+  "agentconf/errtypes.py": "46b29caec4390ced092e9b018c4abf294671ef7385a8b8818d17700df73047a8",
+  "agentconf/heldout.py": "ccce77ff5a953659307f98811db32f59e866e4aa6c0fd87a8482222c8ce15f01",
+  "agentconf/io.py": "017d8eb3dd3ae4d2b0de449be51fbb746afcef28b0192d235040d4b7a3d9dff3",
+  "agentconf/metrics.py": "174cfaecf3fb1f928d573d4f43fd1ef1f8d212191cb470b6e526f740eb0aea53",
+  "agentconf/model.py": "331c878ef0ce3d4f17ff12aa9c5c8f6b021cc53eb358465a2dd1472caac01c93",
+  "agentconf/probes.py": "eb04f2b46ef165b13b2dc249eda934e099643f1e6f1d6a1f92c767e977704ad8",
+  "agentconf/prompts.py": "8db24b486e63633e9591de24bfef5de3de11f14123a18cffb2d6559531f45907",
+  "agentconf/runs.py": "7ee2fc3e4a721c23ec23496aa0a53b8bc1d6a7c0d2a80e85c0724617cba804db",
+  "agentconf/sources.py": "679693ceb387bcc1e8398112fb8c2581d67d949e6a188aeb07819fcbd7a30581",
+  "agentconf/text.py": "51664e9782ba8bc560937c7f55dc8073ee0b9c506276e60afbeea3d71c48c104"
+ }
+}

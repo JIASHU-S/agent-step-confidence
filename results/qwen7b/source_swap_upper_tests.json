@@ -1,0 +1,153 @@
+{
+ "protocol": "source_swap_v1.2 draft (section 11)",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "m": 446,
+ "readout_rule": "upper",
+ "target_run": "runs\\qwen7b",
+ "target_split": "test",
+ "readouts": {
+  "S0": [
+   [
+    "mean",
+    16
+   ],
+   [
+    "mean",
+    20
+   ],
+   [
+    "mean",
+    24
+   ],
+   [
+    "mean",
+    28
+   ],
+   [
+    "last",
+    16
+   ],
+   [
+    "last",
+    20
+   ],
+   [
+    "last",
+    24
+   ],
+   [
+    "last",
+    28
+   ]
+  ],
+  "C1": [
+   [
+    "mean",
+    16
+   ],
+   [
+    "mean",
+    20
+   ],
+   [
+    "mean",
+    24
+   ],
+   [
+    "mean",
+    28
+   ],
+   [
+    "last",
+    16
+   ],
+   [
+    "last",
+    20
+   ],
+   [
+    "last",
+    24
+   ],
+   [
+    "last",
+    28
+   ]
+  ],
+  "S2QA": [
+   [
+    "mean",
+    16
+   ],
+   [
+    "mean",
+    20
+   ],
+   [
+    "mean",
+    24
+   ],
+   [
+    "mean",
+    28
+   ],
+   [
+    "last",
+    16
+   ],
+   [
+    "last",
+    20
+   ],
+   [
+    "last",
+    24
+   ],
+   [
+    "last",
+    28
+   ]
+  ]
+ },
+ "tests": {
+  "I": {
+   "estimate": 0.15986795778306273,
+   "ci_lo": 0.08680693175779809,
+   "ci_hi": 0.2294347509565962
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": 0.15382152673663174,
+   "ci_lo": 0.09726446359138394,
+   "ci_hi": 0.20820432555938104
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.006046431046430989,
+   "ci_lo": -0.044702184327406976,
+   "ci_hi": 0.056218757782758776
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": 0.008801108801108848,
+   "ci_lo": -0.027351981093614176,
+   "ci_hi": 0.04455257301310383
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": 0.05307502498750627,
+   "ci_lo": 0.003250539907653885,
+   "ci_hi": 0.10203551324017432
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": 0.1111829347123463,
+   "ci_lo": 0.05066820204750555,
+   "ci_hi": 0.1697480594818017
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": 0.028679561116270014,
+   "ci_lo": 0.003994843485366875,
+   "ci_hi": 0.052866349435604545
+  },
+  "H1_this_model": true,
+  "H2_this_model": true
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

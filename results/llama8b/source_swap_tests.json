@@ -1,0 +1,63 @@
+{
+ "protocol": "source_swap_v1.1 (section 8)",
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "m": 693,
+ "readouts": {
+  "S0": {
+   "pooling": "last",
+   "layer": 14,
+   "source_val_auroc": 0.8619940665395212
+  },
+  "C1": {
+   "pooling": "mean",
+   "layer": 14,
+   "source_val_auroc": 0.9336468129571578
+  },
+  "S2QA": {
+   "pooling": "last",
+   "layer": 14,
+   "source_val_auroc": 0.9745196324143692
+  }
+ },
+ "tests": {
+  "I": {
+   "estimate": 0.07977490903268447,
+   "ci_lo": -0.04350717920415432,
+   "ci_hi": 0.20820916535962564
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": -0.03222237588162069,
+   "ci_lo": -0.09023858665457421,
+   "ci_hi": 0.021174469116450684
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.11199728491430516,
+   "ci_lo": 0.014579693426018453,
+   "ci_hi": 0.22059580769543408
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": -0.09587646360088242,
+   "ci_lo": -0.20782437500112003,
+   "ci_hi": 0.02106936560528453
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": -0.1125708753975937,
+   "ci_lo": -0.18901805618534506,
+   "ci_hi": -0.036346177691982264
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": -0.05685019206145969,
+   "ci_lo": -0.15423695178349253,
+   "ci_hi": 0.034843708632884114
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": -0.07056918567709924,
+   "ci_lo": -0.11275939001922845,
+   "ci_hi": -0.02871804600101766
+  },
+  "H1_this_model": false,
+  "H2_this_model": false
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

@@ -21,3 +21,8 @@ data/submission_v2/**/*.parquet
 data/submission_v2/**/*.part
 *.pem
 *.key
+
+# local caches and downloaded datasets (pinned by sha256 in manifests/)
+Jiashu*pytensor*/
+data/source_swap/**/*.parquet
+*.lock

@@ -72,3 +72,41 @@ def render(tokenizer, messages):
         return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     # Plain-text fallback for base models / tests.
     return "".join(m["content"] + "\n" for m in messages) + "\n"
+
+
+# ---- Source-swap sources (protocols/source_swap_v1.md)
+
+def react_no_docs_messages(question):
+    """ReAct format with no documents: the answer-knowledge source in agent format (C1)."""
+    user = f"Documents: (none)\nQuestion: {question}"
+    return [{"role": "system", "content": REACT_SYSTEM}, {"role": "user", "content": user}]
+
+
+REACT_NO_DOCS_THOUGHT = "Thought 1: There are no documents, so I will answer from memory.\nAction 1: Finish["
+
+LOOKUP_SYSTEM = ("You plan document lookups for multi-hop questions. Given the question and the titles of the "
+                 "available documents, reply with the title of the one document to read next, exactly as listed, "
+                 "with no explanation.")
+LOOKUP_FEW_SHOT = [
+    ("Documents: Spirited Away; Hayao Miyazaki; Studio Ghibli; Tokyo\n"
+     "Question: What is the nationality of the director of the film Spirited Away?\n"
+     "Which document should be read first?", "Spirited Away"),
+    ("Documents: Spirited Away; Hayao Miyazaki; Studio Ghibli; Tokyo\n"
+     "Question: What is the nationality of the director of the film Spirited Away?\n"
+     "Already read:\n[Spirited Away] Spirited Away is a 2001 Japanese animated fantasy film written and directed by "
+     "Hayao Miyazaki.\nWhich document should be read next?", "Hayao Miyazaki"),
+]
+
+
+def lookup_messages(example, read=()):
+    """Lookup choice in QA format (S2-QA). `read`: [(title, observation text)] already read."""
+    user = f"Documents: {'; '.join(example['titles'])}\nQuestion: {example['question']}\n"
+    if read:
+        user += "Already read:\n" + "".join(f"[{t}] {o}\n" for t, o in read) + "Which document should be read next?"
+    else:
+        user += "Which document should be read first?"
+    msgs = [{"role": "system", "content": LOOKUP_SYSTEM}]
+    for q, a in LOOKUP_FEW_SHOT:
+        msgs += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]
+    msgs.append({"role": "user", "content": user})
+    return msgs

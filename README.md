@@ -110,7 +110,47 @@ python scripts/05_figures.py --run runs/qwen7b
 
 # 6. step-position control, after 06-08 (CPU, minutes; not part of run_experiment.py)
 python scripts/09_position_control.py --run runs/qwen7b
+
+# 7. exploratory: TriviaQA transfer by error type, probe directions, INLP removal (CPU, ~minutes; after 03 and 16)
+python scripts/18_transfer_decomposition.py --run runs/qwen7b
+
+# 8. source-swap sources (GPU; protocols/source_swap_v1.md). Weight check first, then 50-item pilots per source
+python scripts/19_source_features.py --run runs/qwen7b --verify-agent 10
+python scripts/19_source_features.py --run runs/qwen7b --source trivia_react --role pilot --n 50
+python scripts/19_source_features.py --run runs/qwen7b --source wiki_search --role pilot --n 50 --wiki <2wiki dev.parquet>
+# main data (protocol v1.1 section 8; pin --revision as in manifests/source_swap/data.json)
+python scripts/19_source_features.py --run runs/qwen7b --source trivia_react --role main --n 2000 --revision <rev>
+python scripts/19_source_features.py --run runs/qwen7b --source wiki_search_qa --role main --n 4000 --wiki <2wiki dev.parquet> --revision <rev>
+
+# 9. source-swap analysis: H1', H2', format effect (CPU, under a minute)
+python scripts/20_source_swap.py --run runs/qwen7b
+# Development result on the legacy test split. Use step 10 for the held-out confirmation.
+python scripts/20_source_swap.py --run runs/qwen7b --readout upper
 ```
+
+### 10. HotpotQA confirmation
+
+Both models run on the same 600 final questions, one trajectory per model and question. The existing sources supply
+the probes. Both read-out rules, all intervals and the joint decision use those same trajectories. Report the
+outcome at 600 questions, including inconclusive estimates. MuSiQue belongs to a separate cross-dataset study.
+
+Run from the repository root in PowerShell. Continue to the next command after the preceding one succeeds.
+
+```powershell
+.\scripts\python_local.ps1 scripts/21_select_heldout.py --verify
+.\scripts\python_local.ps1 scripts/22_confirm_source_swap.py --freeze
+$env:AGENTCONF_SAMPLE_BATCH_SIZE = "1"
+.\scripts\python_local.ps1 scripts/01_run_agent.py --model Qwen/Qwen2.5-7B-Instruct --out runs/qwen7b-final --ids-file manifests/heldout_v1/heldout_manifest.json --splits final --revision a09a35458c702b33eeacc393d103063234e8bc28
+.\scripts\python_local.ps1 scripts/01_run_agent.py --model meta-llama/Llama-3.1-8B-Instruct --out runs/llama8b-final --ids-file manifests/heldout_v1/heldout_manifest.json --splits final --revision 0e9e39f249a16976918f6564b8830bc894c89659
+.\scripts\python_local.ps1 scripts/22_confirm_source_swap.py
+```
+
+After an interruption, resume the interrupted command in the same environment and output directory. Each collector
+skips completed questions with valid checkpoints. The scorer retains completed read-outs and writes
+`results/source_swap_confirmation.json` after both models pass. Launching it again reports the existing result.
+
+Run the test suite with `pytest tests`: a bare `pytest` also collects the source snapshots saved under
+`runs/*/attempts/` and fails on their stale imports.
 
 Results go to `runs/<name>/results/`. Hidden states are stored for 8 evenly spaced layers (`--layers` to change),
 mean-pooled over the Action span and at its last token; the layer and pooling for the probe are chosen by
@@ -157,6 +197,8 @@ agentconf/model.py     loading (4-bit), generation, teacher-forced hidden states
 agentconf/checkpoints.py  collection locks, configuration checks, per-question recovery and seeding
 agentconf/io.py        atomic files, durable JSONL appends and incomplete-tail repair
 agentconf/probes.py    standardise -> PCA -> logistic probes, grouped cross-validation
+agentconf/heldout.py   held-out question selection (legacy-ID, exact and near-duplicate exclusion, hash order)
+agentconf/errtypes.py  step error types (repeat / distractor / no-match search, wrong answer), same-step AUROC
 agentconf/seqmodel.py  M0/M1 in PyMC, PSIS-LOO comparison, forward recursion, hand-off curves
 scripts/               stages 01-08, the full-workflow runner and the step-position control (09)
 ```

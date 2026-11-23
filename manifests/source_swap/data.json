@@ -1,0 +1,26 @@
+{
+ "protocol": "protocols/source_swap_v1.md",
+ "recorded": "2026-11-23",
+ "datasets": {
+  "2wikimultihopqa_dev": {
+   "repo": "xanhho/2WikiMultihopQA",
+   "repo_type": "dataset",
+   "revision": "612bc5039a457880d9e7d84c3b0a4cf154b70e4f",
+   "file": "dev.parquet",
+   "local_path": "data/source_swap/2wiki/612bc5039a457880d9e7d84c3b0a4cf154b70e4f/dev.parquet",
+   "bytes": 30056098,
+   "sha256": "c0d8b60b9026b728fb07ad74c5252a0f188f6942e8ba5c02df4dfa369502ea8d",
+   "rows": 12576,
+   "license": "apache-2.0 (repository card)",
+   "note": "Mirror of the Alab-NII 2WikiMultihopQA release; context / supporting_facts / evidences stored as JSON strings. No question text duplicates HotpotQA validation after normalisation."
+  }
+ },
+ "models": {
+  "qwen7b": {
+   "repo": "Qwen/Qwen2.5-7B-Instruct",
+   "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+   "repo_last_modified": "2025-01-12",
+   "note": "The legacy runs (October 2026) did not record a revision; main has not changed since 2025-01-12, and scripts/19 --verify-agent checks that these weights reproduce the stored agent features."
+  }
+ }
+}

@@ -112,3 +112,23 @@ def test_scripted_episode_labels(tok, monkeypatch):
     assert "Observation 1: [Kyoto University]" in ep["transcript"] and "Observation 1: x" not in ep["transcript"]
     assert [t for t, phase in progress if phase == "generating action"] == [1, 2, 3]
     assert [t for t, phase in progress if phase == "rating confidence"] == [1, 2, 3]
+
+
+def test_source_items_tiny(tok):
+    """All three source-swap item types run end to end on a tiny model and return finite features."""
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location(
+        "s19", Path(__file__).resolve().parents[1] / "scripts" / "19_source_features.py")
+    s19 = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(s19)
+    wiki = {**EX, "supporting_ordered": list(EX["supporting_titles"])}
+    items = {"trivia_react": {"id": "t1", "hop": 1, "ex": {"question": "Capital of Japan?", "answers": ["Tokyo"]}},
+             "wiki_search": {"id": "w1", "hop": 2, "ex": wiki},
+             "wiki_search_qa": {"id": "w2", "hop": 1, "ex": wiki}}
+    model = next(_models(tok))
+    for source, item in items.items():
+        row, f = s19.run_item(model, tok, source, item, [0, 2])
+        assert f["mean"].shape == (2, 32) and np.isfinite(f["mean"]).all() and np.isfinite(f["last"]).all()
+        assert row["source"] == source and row["correct"] in (0, 1)

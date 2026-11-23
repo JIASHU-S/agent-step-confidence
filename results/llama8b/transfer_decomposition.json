@@ -1,0 +1,53 @@
+{
+ "exploratory": "legacy test split, already used in earlier analyses; hypothesis generation only",
+ "readout_in_domain": [
+  "last",
+  23
+ ],
+ "readout_trivia_only": [
+  "last",
+  14
+ ],
+ "type_counts": {
+  "train": {
+   "finish_ok": 379,
+   "finish_wrong": 165,
+   "invalid": 1,
+   "search_distractor": 243,
+   "search_nomatch": 1,
+   "search_ok": 999,
+   "search_repeat": 261
+  },
+  "test": {
+   "finish_ok": 210,
+   "finish_wrong": 59,
+   "invalid": 1,
+   "search_distractor": 138,
+   "search_ok": 491,
+   "search_repeat": 129
+  }
+ },
+ "inlp": {
+  "k_removed": 5,
+  "heldout_trivia_auroc_trace": [
+   0.8531207598371777,
+   0.826181592039801,
+   0.7933344640434192,
+   0.7276967435549524,
+   0.6489993215739482,
+   0.5485922659430122
+  ],
+  "target": 0.55
+ },
+ "random_control_auroc_all": [
+  0.878430551374838,
+  0.8783476641058863,
+  0.8783651140572446,
+  0.8785003511802711,
+  0.8785439760586666
+ ],
+ "n_boot": 2000,
+ "n_boot_dir": 100,
+ "n_perm": 50,
+ "pca": 64
+}

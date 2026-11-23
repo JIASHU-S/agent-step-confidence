@@ -1,0 +1,63 @@
+{
+ "protocol": "source_swap_v1.1 (section 8)",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "m": 446,
+ "readouts": {
+  "S0": {
+   "pooling": "mean",
+   "layer": 20,
+   "source_val_auroc": 0.8920735573874444
+  },
+  "C1": {
+   "pooling": "last",
+   "layer": 20,
+   "source_val_auroc": 0.8837719298245614
+  },
+  "S2QA": {
+   "pooling": "mean",
+   "layer": 16,
+   "source_val_auroc": 0.958380771663504
+  }
+ },
+ "tests": {
+  "I": {
+   "estimate": 0.3508620689655172,
+   "ci_lo": 0.22378416084431754,
+   "ci_hi": 0.48035340814247784
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": 0.15086206896551724,
+   "ci_lo": 0.052628293020991146,
+   "ci_hi": 0.24530653125949686
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.19999999999999996,
+   "ci_lo": 0.10254684937188534,
+   "ci_hi": 0.2975489160478179
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": -0.10145530145530135,
+   "ci_lo": -0.18650426200192288,
+   "ci_hi": -0.013637542207996282
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": 0.030547226386806625,
+   "ci_lo": -0.05838456679325118,
+   "ci_hi": 0.12022337894894697
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": 0.0898513251454428,
+   "ci_lo": -0.02650676988654168,
+   "ci_hi": 0.21990643086372086
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": -0.011802942182689069,
+   "ci_lo": -0.057103128287319165,
+   "ci_hi": 0.03183310943708544
+  },
+  "H1_this_model": true,
+  "H2_this_model": true
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

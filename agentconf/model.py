@@ -6,8 +6,8 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-def load_model(name, load_in_4bit=True, dtype="bfloat16", device_map="auto"):
-    tok = AutoTokenizer.from_pretrained(name)
+def load_model(name, load_in_4bit=True, dtype="bfloat16", device_map="auto", revision=None):
+    tok = AutoTokenizer.from_pretrained(name, revision=revision)
     tok.padding_side = "left"
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
@@ -20,7 +20,7 @@ def load_model(name, load_in_4bit=True, dtype="bfloat16", device_map="auto"):
         )
     else:
         kwargs["dtype"] = getattr(torch, dtype)
-    model = AutoModelForCausalLM.from_pretrained(name, **kwargs)
+    model = AutoModelForCausalLM.from_pretrained(name, revision=revision, **kwargs)
     model.eval()
     return model, tok
 

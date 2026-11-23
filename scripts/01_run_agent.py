@@ -4,10 +4,14 @@ Resumable: episodes already in <out>/episodes.jsonl are skipped.
 
 Example (RTX 4070 Ti, 12 GB):
     python scripts/01_run_agent.py --model Qwen/Qwen2.5-7B-Instruct --out runs/qwen7b
+Held-out questions from a frozen manifest (scripts/21_select_heldout.py), same settings as the legacy run:
+    python scripts/01_run_agent.py --model Qwen/Qwen2.5-7B-Instruct --out runs/qwen7b-final         --ids-file manifests/heldout_v1/heldout_manifest.json --splits final --revision <commit>
 Quick check:
     python scripts/01_run_agent.py --model Qwen/Qwen2.5-0.5B-Instruct --out runs/smoke --n-train 5 --n-test 5 --no-4bit
 """
 import argparse
+import hashlib
+import json
 import sys
 import time
 from pathlib import Path
@@ -15,7 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from agentconf.agent import run_episode  # noqa: E402
 from agentconf.checkpoints import check_config, read_meta, recover_agent, run_lock, seed_question  # noqa: E402
-from agentconf.data import load_hotpot  # noqa: E402
+from agentconf.data import load_hotpot, load_hotpot_parquet  # noqa: E402
 from agentconf.io import append_jsonl, save_npz, write_json  # noqa: E402
 from agentconf.model import load_model, select_layers  # noqa: E402
 
@@ -33,11 +37,37 @@ def main():
     ap.add_argument("--layers", default="auto", help="'auto' (8 evenly spaced), 'all', or comma-separated indices")
     ap.add_argument("--no-4bit", action="store_true")
     ap.add_argument("--no-verbal", action="store_true")
+    ap.add_argument("--ids-file", help="held-out manifest; replaces --n-train/--n-test/--seed selection")
+    ap.add_argument("--splits", help="comma-separated manifest splits to run (with --ids-file; default final)")
+    ap.add_argument("--revision", help="model repository revision (commit); recorded in meta")
     args = ap.parse_args()
-    if args.n_train < 0 or args.n_test < 0 or args.n_train + args.n_test == 0 or args.max_steps < 1:
+    if args.ids_file:
+        args.ids_sha256 = hashlib.sha256(Path(args.ids_file).read_bytes()).hexdigest()
+        args.n_train = args.n_test = 0
+        args.splits = args.splits or "final"
+    elif args.splits:
+        ap.error("--splits needs --ids-file")
+    bad_counts = args.n_train < 0 or args.n_test < 0 or args.n_train + args.n_test == 0
+    if (not args.ids_file and bad_counts) or args.max_steps < 1:
         ap.error("question counts must be nonnegative (with a positive total), and max-steps must be positive")
     with run_lock(args.out):
         collect(args)
+
+
+def manifest_examples(path, names):
+    """Examples of the named manifest splits, in manifest order, from the manifest's pinned HotpotQA file."""
+    root = Path(__file__).resolve().parents[1]
+    m = json.loads(Path(path).read_text(encoding="utf-8"))
+    data = root / m["dataset"]["local_path"]
+    if hashlib.sha256(data.read_bytes()).hexdigest() != m["dataset"]["sha256"]:
+        raise ValueError(f"{data} does not match the manifest's sha256")
+    unknown = [n for n in names if n not in m["splits"]]
+    if unknown:
+        raise ValueError(f"splits {unknown} are not in the manifest")
+    split = {i: n for n in names for i in m["splits"][n]}
+    if len(split) != sum(len(m["splits"][n]) for n in names):
+        raise ValueError("manifest splits overlap")
+    return load_hotpot_parquet(data, list(split)), split
 
 
 def collect(args):
@@ -52,10 +82,13 @@ def collect(args):
     elif any((out / p).exists() for p in ("episodes.jsonl", "steps.jsonl")) or any((out / "feats").glob("*.npz")):
         raise ValueError("Existing agent outputs have no meta.json; restore it or use a new output directory")
 
-    examples = load_hotpot(args.n_train + args.n_test, seed=args.seed)
-    if len(examples) != args.n_train + args.n_test:
-        raise ValueError("Dataset contains fewer questions than requested")
-    split = {ex["id"]: ("train" if i < args.n_train else "test") for i, ex in enumerate(examples)}
+    if getattr(args, "ids_file", None):
+        examples, split = manifest_examples(args.ids_file, args.splits.split(","))
+    else:
+        examples = load_hotpot(args.n_train + args.n_test, seed=args.seed)
+        if len(examples) != args.n_train + args.n_test:
+            raise ValueError("Dataset contains fewer questions than requested")
+        split = {ex["id"]: ("train" if i < args.n_train else "test") for i, ex in enumerate(examples)}
     if len(split) != len(examples):
         raise ValueError("Dataset contains duplicate question IDs")
     if saved is not None:
@@ -64,7 +97,7 @@ def collect(args):
     model, tok = None, None
     # Legacy metadata stored resolved layers only. Resolve explicit legacy layer requests before recovery.
     if saved is None or ("layers_spec" not in saved and args.layers != "auto"):
-        model, tok = load_model(args.model, load_in_4bit=not args.no_4bit)
+        model, tok = load_model(args.model, load_in_4bit=not args.no_4bit, revision=getattr(args, "revision", None))
         layers = select_layers(model.config.num_hidden_layers + 1, args.layers)
         if saved is not None:
             check_config(saved, {"layers": layers})
@@ -83,7 +116,7 @@ def collect(args):
     if not todo:
         return
     if model is None:
-        model, tok = load_model(args.model, load_in_4bit=not args.no_4bit)
+        model, tok = load_model(args.model, load_in_4bit=not args.no_4bit, revision=getattr(args, "revision", None))
     check_config(meta, {"layers": select_layers(model.config.num_hidden_layers + 1, args.layers)})
     t0 = time.time()
     for i, ex in enumerate(todo, 1):

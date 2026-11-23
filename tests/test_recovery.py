@@ -361,3 +361,25 @@ def test_analysis_rejects_incomplete_trivia_export(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "load_run", lambda *a: pytest.fail("analysis read partial results"))
     with pytest.raises(ValueError, match="incomplete"):
         module.main()
+
+
+def test_agent_runs_manifest_ids(tmp_path, monkeypatch, agent):
+    module, calls = agent
+    data = tmp_path / "pool.parquet"
+    data.write_bytes(b"pinned")
+    import hashlib
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps({"dataset": {"local_path": str(data), "sha256": hashlib.sha256(b"pinned").hexdigest()},
+                                    "splits": {"calibration": ["q2"], "final": ["q1", "q0"]}}))
+    monkeypatch.setattr(module, "load_hotpot_parquet", lambda path, ids: [{"id": i} for i in ids])
+    args = argparse.Namespace(**{**vars(agent_args(tmp_path / "run")), "ids_file": str(manifest), "splits": "final",
+                                 "ids_sha256": "x", "revision": None, "n_train": 0, "n_test": 0})
+    module.collect(args)
+    meta, _, steps = load_run(tmp_path / "run")
+    assert calls == ["q1", "q0"] and meta["split"] == {"q1": "final", "q0": "final"}
+    assert {s["split"] for s in steps} == {"final"}
+    with pytest.raises(ValueError, match="different settings"):
+        module.collect(argparse.Namespace(**{**vars(args), "splits": "calibration,final"}))
+    data.write_bytes(b"changed")
+    with pytest.raises(ValueError, match="sha256"):
+        module.collect(args)
