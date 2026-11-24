@@ -1,0 +1,71 @@
+{
+ "protocol": "source_swap_v1.1 (section 8)",
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "m": 446,
+ "readout_rule": "selected",
+ "target_run": "F:\\Jiashu\\llm-uq-project\\agent-conf\\runs\\qwen7b-final",
+ "target_split": "final",
+ "readouts": {
+  "S0": {
+   "pooling": "mean",
+   "layer": 20,
+   "source_val_auroc": 0.8920735573874444
+  },
+  "C1": {
+   "pooling": "last",
+   "layer": 20,
+   "source_val_auroc": 0.8837719298245614
+  },
+  "S2QA": {
+   "pooling": "mean",
+   "layer": 16,
+   "source_val_auroc": 0.958380771663504
+  }
+ },
+ "tests": {
+  "I": {
+   "estimate": 0.19033747487194586,
+   "ci_lo": 0.09287526843940863,
+   "ci_hi": 0.2891162758666122
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": 0.06458736976167567,
+   "ci_lo": 0.0009357982944281474,
+   "ci_hi": 0.12812176930763836
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.12575010511027018,
+   "ci_lo": 0.05397507425194497,
+   "ci_hi": 0.20045183199789504
+  },
+  "finish_S2QA_minus_S0": {
+   "estimate": -0.12575010511027018,
+   "ci_lo": -0.20045183199789524,
+   "ci_hi": -0.05397507425194497
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": -0.10839735504338188,
+   "ci_lo": -0.16900312215035068,
+   "ci_hi": -0.04788312075348496
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": 0.04019943907759427,
+   "ci_lo": -0.014641536278890999,
+   "ci_hi": 0.09330649918888563
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": 0.037052871597548775,
+   "ci_lo": -0.031094750620831505,
+   "ci_hi": 0.10674786627680788
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": -0.0019785847299814696,
+   "ci_lo": -0.03027324089713841,
+   "ci_hi": 0.02694015823506723
+  },
+  "H1_this_model": true,
+  "H2_this_model": true
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

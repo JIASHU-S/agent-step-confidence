@@ -1,0 +1,71 @@
+{
+ "protocol": "source_swap_v1.1 (section 8)",
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "m": 693,
+ "readout_rule": "selected",
+ "target_run": "F:\\Jiashu\\llm-uq-project\\agent-conf\\runs\\llama8b-final",
+ "target_split": "final",
+ "readouts": {
+  "S0": {
+   "pooling": "last",
+   "layer": 14,
+   "source_val_auroc": 0.8619940665395212
+  },
+  "C1": {
+   "pooling": "mean",
+   "layer": 14,
+   "source_val_auroc": 0.9336468129571578
+  },
+  "S2QA": {
+   "pooling": "last",
+   "layer": 14,
+   "source_val_auroc": 0.9745196324143692
+  }
+ },
+ "tests": {
+  "I": {
+   "estimate": -0.022580238674309472,
+   "ci_lo": -0.09726116580211751,
+   "ci_hi": 0.056888928087114696
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": -0.032935949108920504,
+   "ci_lo": -0.07743067265770179,
+   "ci_hi": 0.015111954949677462
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.010355710434611032,
+   "ci_lo": -0.046521125746543386,
+   "ci_hi": 0.07028281060170548
+  },
+  "finish_S2QA_minus_S0": {
+   "estimate": -0.010355710434611032,
+   "ci_lo": -0.07028281060170549,
+   "ci_hi": 0.046521125746543344
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": 0.009632454467749407,
+   "ci_lo": -0.05482633641707357,
+   "ci_hi": 0.07263977153295066
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": -0.13368620404991982,
+   "ci_lo": -0.18739333294918015,
+   "ci_hi": -0.08341321604706828
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": -0.06207115628970772,
+   "ci_lo": -0.12248692971108847,
+   "ci_hi": -0.003671193790876384
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": -0.063900780986482,
+   "ci_lo": -0.09079690826690463,
+   "ci_hi": -0.0378241723099964
+  },
+  "H1_this_model": false,
+  "H2_this_model": false
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

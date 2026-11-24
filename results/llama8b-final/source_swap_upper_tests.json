@@ -1,0 +1,160 @@
+{
+ "protocol": "source_swap_v1.2 draft (section 11)",
+ "model": "meta-llama/Llama-3.1-8B-Instruct",
+ "m": 693,
+ "readout_rule": "upper",
+ "target_run": "F:\\Jiashu\\llm-uq-project\\agent-conf\\runs\\llama8b-final",
+ "target_split": "final",
+ "readouts": {
+  "S0": [
+   [
+    "mean",
+    18
+   ],
+   [
+    "mean",
+    23
+   ],
+   [
+    "mean",
+    27
+   ],
+   [
+    "mean",
+    32
+   ],
+   [
+    "last",
+    18
+   ],
+   [
+    "last",
+    23
+   ],
+   [
+    "last",
+    27
+   ],
+   [
+    "last",
+    32
+   ]
+  ],
+  "C1": [
+   [
+    "mean",
+    18
+   ],
+   [
+    "mean",
+    23
+   ],
+   [
+    "mean",
+    27
+   ],
+   [
+    "mean",
+    32
+   ],
+   [
+    "last",
+    18
+   ],
+   [
+    "last",
+    23
+   ],
+   [
+    "last",
+    27
+   ],
+   [
+    "last",
+    32
+   ]
+  ],
+  "S2QA": [
+   [
+    "mean",
+    18
+   ],
+   [
+    "mean",
+    23
+   ],
+   [
+    "mean",
+    27
+   ],
+   [
+    "mean",
+    32
+   ],
+   [
+    "last",
+    18
+   ],
+   [
+    "last",
+    23
+   ],
+   [
+    "last",
+    27
+   ],
+   [
+    "last",
+    32
+   ]
+  ]
+ },
+ "tests": {
+  "I": {
+   "estimate": 0.11693650609756079,
+   "ci_lo": 0.07028328990352001,
+   "ci_hi": 0.1621823133870079
+  },
+  "H2_distractor_S2QA_minus_S0": {
+   "estimate": 0.06550314427232562,
+   "ci_lo": 0.038016180785555256,
+   "ci_hi": 0.09353767236610804
+  },
+  "H2_finish_S0_minus_S2QA": {
+   "estimate": 0.05143336182523517,
+   "ci_lo": 0.017100580228164602,
+   "ci_hi": 0.0857232217221694
+  },
+  "finish_S2QA_minus_S0": {
+   "estimate": -0.05143336182523517,
+   "ci_lo": -0.0857232217221694,
+   "ci_hi": -0.017100580228164644
+  },
+  "format_C1_minus_S0_finish": {
+   "estimate": -0.006570944835294856,
+   "ci_lo": -0.04563964946122616,
+   "ci_hi": 0.032997082146720445
+  },
+  "format_C1_minus_S0_distractor": {
+   "estimate": -0.017411863254503945,
+   "ci_lo": -0.05315461673624898,
+   "ci_hi": 0.016979664895385087
+  },
+  "format_C1_minus_S0_repeat": {
+   "estimate": -0.08621346886912318,
+   "ci_lo": -0.12039685556237528,
+   "ci_hi": -0.05084348583756103
+  },
+  "format_C1_minus_S0_all": {
+   "estimate": -0.027549881943903953,
+   "ci_lo": -0.04565258808836827,
+   "ci_hi": -0.00959862980301919
+  },
+  "H1_this_model": true,
+  "gain_this_model": true,
+  "finish_noninferior_this_model": false,
+  "finish_cost_this_model": true
+ },
+ "n_boot": 2000,
+ "note": "H1' is judged only when both models are done; this file holds one model."
+}

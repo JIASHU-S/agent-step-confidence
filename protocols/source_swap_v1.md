@@ -192,3 +192,18 @@ H1′：[AUROC_distractor(S2-QA) − AUROC_distractor(S0)] − [AUROC_finish(S2-
 **11.7 冻结记录**
 
 2026-11-24 冻结：运行 `python scripts/22_confirm_source_swap.py --freeze`，生成 [v1.2_frozen_inputs.json](../manifests/source_swap/v1.2_frozen_inputs.json)（sha256 `4cabcfd8a567…`）。冻结时还没有任何 final 轨迹；随后在同一张 RTX 4070 Ti 上依次开始 Qwen、Llama 的 final 采集。
+
+## 12. v1.2 确认结果（held-out final，600 题 × 2 模型）
+
+2026-11-24 两个模型的 final 采集完成后（Qwen 11:10，Llama 20:28），对冻结清单运行一次 `python scripts/22_confirm_source_swap.py`，完整性检查全部通过后评分。输出：[source_swap_confirmation.json](../results/source_swap_confirmation.json)，各模型明细在 `results/qwen7b-final/` 与 `results/llama8b-final/`。
+
+| `--readout upper`（95% CI，按题 bootstrap 2000 次） | Qwen | Llama |
+| --- | --- | --- |
+| I | +0.145 [0.101, 0.192] | +0.117 [0.070, 0.162] |
+| G = A_dis(S2-QA) − A_dis(S0) | +0.127 [0.094, 0.158] | +0.066 [0.038, 0.094] |
+| C = A_fin(S2-QA) − A_fin(S0) | −0.018 [−0.055, 0.018]：不确定 | −0.051 [−0.086, −0.017]：存在损失 |
+
+- H1″（两个模型 I > 0）：**成立**；G（两个模型 G > 0）：**成立**。
+- Finish 非劣（下界 > −0.05）两个模型都未通过（Qwen 下界 −0.055，差 0.005）；Llama 的 C 区间整体低于零。
+- 按 11.5 判定为 `gain_only`：只声称检索增益，对 Finish 代价不下联合结论；MuSiQue 可选。
+- v1.1 单读出规则在 final 上的点估计：Qwen I = +0.190，G = +0.065，C = −0.126；Llama I = −0.023，G = −0.033，C = −0.010。单读出结论依赖选层，固定上半层平均读出的结论在两个模型上都稳定。
