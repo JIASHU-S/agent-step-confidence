@@ -1,6 +1,7 @@
 """Hidden states read BEFORE the action is written, by replaying recorded episodes (GPU, no generation).
 
     python scripts/07_preaction_features.py --run runs/qwen7b
+    python scripts/07_preaction_features.py --run runs/qwen7b-final   # held-out run: manifest questions, pinned revision
 
 For every recorded step t the transcript is rebuilt exactly as the agent saw it, and one teacher-forced pass over
 prompt + history + step text gives the residual stream at two earlier points:
@@ -13,6 +14,8 @@ array has_action. Resumable: complete, valid files are skipped. --verify N recom
 N episodes and prints its cosine similarity with the stored 03 features (should be ~1.0).
 """
 import argparse
+import hashlib
+import importlib.util
 import json
 import re
 import sys
@@ -59,6 +62,21 @@ def valid_checkpoint(path, n_steps, n_layers):
         return False
 
 
+def run_examples(meta):
+    """The questions a run was collected on: a held-out manifest (pinned HotpotQA file) or the legacy sample."""
+    if meta.get("ids_file"):
+        root = Path(__file__).resolve().parents[1]
+        spec = importlib.util.spec_from_file_location("run_agent", root / "scripts" / "01_run_agent.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        manifest = root / meta["ids_file"].replace("\\", "/")
+        if hashlib.sha256(manifest.read_bytes()).hexdigest() != meta.get("ids_sha256"):
+            raise SystemExit(f"{manifest} does not match the run's recorded ids_sha256")
+        examples, _ = mod.manifest_examples(manifest, meta["splits"].split(","))
+        return examples
+    return load_hotpot(meta["n_train"] + meta["n_test"], seed=meta["seed"])
+
+
 @torch.no_grad()
 def step_states(model, tok, full, chars, layers):
     """Hidden states [len(chars), n_layers, d] at the tokens covering the given character positions."""
@@ -91,7 +109,7 @@ def collect(args):
     by_q = {}
     for s in steps:
         by_q.setdefault(s["qid"], []).append(s)
-    examples = {ex["id"]: ex for ex in load_hotpot(meta["n_train"] + meta["n_test"], seed=meta["seed"])}
+    examples = {ex["id"]: ex for ex in run_examples(meta)}
     missing = [e["qid"] for e in episodes if e["qid"] not in examples]
     if missing:
         raise SystemExit(f"{len(missing)} recorded questions not found in the reloaded split, e.g. {missing[:3]}")
@@ -103,7 +121,8 @@ def collect(args):
     print(f"{len(episodes) - len(todo)} done, {len(todo)} to replay", flush=True)
     if not todo:
         return
-    model, tok = load_model(meta["model"], load_in_4bit=not args.no_4bit)
+    pinned = {"revision": meta["revision"]} if meta.get("revision") else {}  # held-out runs record a revision
+    model, tok = load_model(meta["model"], load_in_4bit=not args.no_4bit, **pinned)
     t0 = time.time()
     for n, ep in enumerate(todo, 1):
         ex = examples[ep["qid"]]

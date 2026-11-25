@@ -145,6 +145,24 @@ $env:AGENTCONF_SAMPLE_BATCH_SIZE = "1"
 .\scripts\python_local.ps1 scripts/22_confirm_source_swap.py
 ```
 
+### 11. Main-results confirmation (RQ1–RQ3 on the held-out final split)
+
+Protocol: [`protocols/main_confirmation_v1.md`](protocols/main_confirmation_v1.md). Probes and baselines are fitted once
+on the legacy training split, with the read-outs reported in the paper, and scored once on the same 600 final
+questions. The script checks that re-selecting the read-outs on the training split reproduces the frozen ones.
+
+```powershell
+# label-free pre-action replay of the final trajectories (GPU)
+.\scripts\python_local.ps1 scripts/07_preaction_features.py --run runs/qwen7b-final
+.\scripts\python_local.ps1 scripts/07_preaction_features.py --run runs/llama8b-final
+# freeze code and input hashes, then score once (CPU; NUTS fits included)
+.\scripts\python_local.ps1 scripts/23_confirm_main.py --freeze
+.\scripts\python_local.ps1 scripts/23_confirm_main.py
+```
+
+Output: `results/main_confirmation.json` (pre-registered flags and the paper framing) and
+`runs/<m>-final/results/main_confirmation_model.json` (every estimate, per model).
+
 After an interruption, resume the interrupted command in the same environment and output directory. Each collector
 skips completed questions with valid checkpoints. The scorer retains completed read-outs and writes
 `results/source_swap_confirmation.json` after both models pass. Launching it again reports the existing result.

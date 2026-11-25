@@ -133,3 +133,40 @@ def test_preaction_resume_after_interruption_and_corrupt_checkpoint(tmp_path, mo
     replayed.clear()
     pre.collect(args)
     assert not replayed
+
+
+def test_preaction_held_out_run_uses_manifest(tmp_path, monkeypatch):
+    """Script 07 on a held-out run: questions come from the recorded manifest (hash-checked), not the legacy sample."""
+    import hashlib
+    import importlib.util
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location("pre_h", root / "scripts/07_preaction_features.py")
+    pre = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pre)
+    manifest = tmp_path / "m.json"
+    manifest.write_text(json.dumps({"splits": {"final": ["q1"]}}))
+    meta = {"ids_file": str(manifest), "ids_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+            "splits": "final", "n_train": 0, "n_test": 0, "seed": 0}
+    seen = {}
+    real = importlib.util.spec_from_file_location
+
+    def fake_spec(name, path):
+        s = real(name, path)
+        orig = s.loader.exec_module
+
+        def exec_module(mod):
+            orig(mod)
+            mod.manifest_examples = lambda p, names: (seen.update(path=p, names=names) or ([EX], {"q1": "final"}))
+        s.loader.exec_module = exec_module
+        return s
+
+    monkeypatch.setattr(pre.importlib.util, "spec_from_file_location", fake_spec)
+    monkeypatch.setattr(pre, "load_hotpot", lambda *a, **k: pytest.fail("legacy sample used for a held-out run"))
+    assert pre.run_examples(meta) == [EX]
+    assert seen["names"] == ["final"] and Path(seen["path"]) == manifest
+    meta["ids_sha256"] = "0" * 64
+    with pytest.raises(SystemExit, match="ids_sha256"):
+        pre.run_examples(meta)
