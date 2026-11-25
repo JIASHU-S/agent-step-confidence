@@ -163,6 +163,18 @@ questions. The script checks that re-selecting the read-outs on the training spl
 Output: `results/main_confirmation.json` (pre-registered flags and the paper framing) and
 `runs/<m>-final/results/main_confirmation_model.json` (every estimate, per model).
 
+### 12. Manual audit of the step labels
+
+Protocol: [`protocols/label_audit_v1.md`](protocols/label_audit_v1.md); annotator instructions:
+[`protocols/label_audit_guidelines.md`](protocols/label_audit_guidelines.md). The sample is drawn once from the
+development runs: about 330 steps (stratified by label, F1 band and repeats) and 40 complete episodes, blinded to
+model and automatic label.
+
+```powershell
+.\scripts\python_local.ps1 scripts/24_label_audit.py sample --runs runs/qwen7b runs/llama8b --out audit/label_audit_v1
+.\scripts\python_local.ps1 scripts/24_label_audit.py score --out audit/label_audit_v1 --annotator A=audit/label_audit_v1/A --annotator B=audit/label_audit_v1/B
+```
+
 After an interruption, resume the interrupted command in the same environment and output directory. Each collector
 skips completed questions with valid checkpoints. The scorer retains completed read-outs and writes
 `results/source_swap_confirmation.json` after both models pass. Launching it again reports the existing result.
