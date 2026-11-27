@@ -155,7 +155,8 @@ questions. The script checks that re-selecting the read-outs on the training spl
 # label-free pre-action replay of the final trajectories (GPU)
 .\scripts\python_local.ps1 scripts/07_preaction_features.py --run runs/qwen7b-final
 .\scripts\python_local.ps1 scripts/07_preaction_features.py --run runs/llama8b-final
-# freeze code and input hashes, then score once (CPU; NUTS fits included)
+# check the text baselines on the development test split (no held-out data), then freeze and score once (CPU)
+.\scripts\python_local.ps1 scripts/23_confirm_main.py --dev-check
 .\scripts\python_local.ps1 scripts/23_confirm_main.py --freeze
 .\scripts\python_local.ps1 scripts/23_confirm_main.py
 ```

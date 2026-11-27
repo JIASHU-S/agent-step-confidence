@@ -1,4 +1,4 @@
-"""Main-results confirmation, protocol MC1 (protocols/main_confirmation_v1.md). CPU.
+"""Main-results confirmation, protocol MC1 v1.1 (protocols/main_confirmation_v1.md, section 8). CPU.
 
 Probes and baselines are fitted once on the legacy training split and scored once on the held-out final split.
 
@@ -32,13 +32,15 @@ from agentconf.io import read_jsonl, write_json  # noqa: E402
 from agentconf.metrics import aurc, auroc, brier, ece, platt  # noqa: E402
 from agentconf.probes import fit_predict, layer_sweep, oof_scores  # noqa: E402
 from agentconf.runs import load_features, load_run  # noqa: E402
+from agentconf.textbase import contexts, pin_encoder, resolve_encoder, select_and_fit  # noqa: E402
 from agentconf.seqmodel import (KINDS, compare, design, fit, logit, posterior,  # noqa: E402
                                 posterior_dataset, sigmoid, trajectory_confidences)
 
-PROTOCOL = "main_confirmation_v1 (protocols/main_confirmation_v1.md)"
+PROTOCOL = "main_confirmation_v1.1 (protocols/main_confirmation_v1.md, section 8)"
+DEFAULT_ENCODER = "sentence-transformers/all-MiniLM-L6-v2"
 CODE = ["scripts/07_preaction_features.py", "scripts/06_robustness.py", "scripts/16_review_checks.py",
         "scripts/23_confirm_main.py"] + [f"agentconf/{m}.py" for m in (
-            "checkpoints", "io", "metrics", "probes", "runs", "seqmodel")]
+            "checkpoints", "io", "metrics", "probes", "runs", "seqmodel", "textbase")]
 DEFAULT_PAIRS = ["runs/qwen7b=runs/qwen7b-final", "runs/llama8b=runs/llama8b-final"]
 # Read-outs reported in the paper (legacy training split). The official freeze must reproduce them.
 REGISTERED = {
@@ -103,6 +105,15 @@ def load_pre(run, steps):
     return {p: np.stack(v).astype(np.float32) for p, v in out.items()}
 
 
+def question_only(pre_step, steps):
+    """The pre-step state of each episode's first step (prompt and question only), repeated for all its steps."""
+    first = {}
+    for i, s in enumerate(steps):
+        if s["t"] == 1:
+            first[s["qid"]] = i
+    return np.stack([pre_step[first[s["qid"]]] for s in steps])
+
+
 def select_readouts(train_run, steps, layers, pca):
     """The paper's selection rules on the legacy training split; returns read-outs and the features they need."""
     y = np.array([s["correct"] for s in steps], int)
@@ -115,7 +126,8 @@ def select_readouts(train_run, steps, layers, pca):
     _, pooling, layer = max(sweeps, key=lambda r: r[0])
     out = {"action": [pooling, int(layer)]}
     pre = load_pre(train_run, steps)
-    for p in PRE_POINTS:
+    pre["question_only"] = question_only(pre["pre_step"], steps)
+    for p in PRE_POINTS + ["question_only"]:
         sw = layer_sweep(pre[p], y, g, layers, n_components=pca)
         out[p] = int(max(sw, key=lambda l: np.nan_to_num(sw[l], nan=-1)))
     tv_path = Path(train_run) / "trivia_feats.npz"
@@ -139,7 +151,8 @@ def freeze(args, pairs):
     out = {"protocol": PROTOCOL, "heldout_manifest": {"path": rel(args.manifest), "sha256": sha256(args.manifest)},
            "split": args.split, "output": rel(args.out),
            "scoring": {"pca": args.pca, "n_boot": args.n_boot, "draws": args.draws, "tune": args.tune,
-                       "chains": args.chains, "few_shot": 50, "few_shot_reps": 20},
+                       "chains": args.chains, "few_shot": 50, "few_shot_reps": 20,
+                       "text_encoder": pin_encoder(args.text_encoder)},
            "code": {c: sha256(ROOT / c) for c in CODE}, "models": {}}
     ids = json.loads(args.manifest.read_text(encoding="utf-8"))["splits"][args.split]
     for s, t in pairs:
@@ -311,7 +324,7 @@ def score_model(train_run, target_run, f, sc):
     text_features = _module("16_review_checks.py").text_features
     lenient_labels = _module("06_robustness.py").lenient_labels
     pca, n_boot = sc["pca"], sc["n_boot"]
-    meta, _, steps_tr = load_side(train_run, "train")
+    meta, episodes_tr, steps_tr = load_side(train_run, "train")
     _, episodes_te, steps_te = load_side(target_run, "final")
     layers = meta["layers"]
     readouts, feats_tr, pre_tr = select_readouts(train_run, steps_tr, layers, pca)
@@ -337,6 +350,11 @@ def score_model(train_run, target_run, f, sc):
     for p in PRE_POINTS:
         jj = layers.index(readouts[p])
         sig[f"probe_{p}"] = fit_predict(pre_tr[p][:, jj, :], y_tr, pre_te[p][:, jj, :], n_components=pca)
+    jq = layers.index(readouts["question_only"])
+    Q_tr = pre_tr["question_only"][:, jq, :]
+    Q_te = question_only(pre_te["pre_step"], steps_te)[:, jq, :]
+    sig["question_only"] = fit_predict(Q_tr, y_tr, Q_te, n_components=pca)
+    q_oof_tr = oof_scores(Q_tr, y_tr, g_tr, n_components=pca)
 
     # ---- output signals (raw for ranking, Platt on legacy train for probabilities)
     prob = {k: v for k, v in sig.items()}
@@ -353,7 +371,14 @@ def score_model(train_run, target_run, f, sc):
     T_tr = np.array([[tf_tr[(s["qid"], s["t"])][k] for k in names] for s in steps_tr], float)
     T_te = np.array([[tf_te[(s["qid"], s["t"])][k] for k in names] for s in steps_te], float)
     lr = make_pipeline(StandardScaler(), LogisticRegression(max_iter=5000)).fit(T_tr, y_tr)
-    sig["visible_text"] = prob["visible_text"] = lr.predict_proba(T_te)[:, 1]
+    sig["visible_text"] = prob["visible_text"] = lr.predict_proba(T_te)[:, 1]  # v1 baseline, kept as an estimate
+    ctx_tr = contexts(steps_tr, {e["qid"]: e["question"] for e in episodes_tr})
+    ctx_te = contexts(steps_te, {e["qid"]: e["question"] for e in episodes_te})
+    text_scores, text_record = select_and_fit(ctx_tr, T_tr, y_tr, g_tr, ctx_te, T_te,
+                                              resolve_encoder(sc["text_encoder"]))
+    for k, v in text_scores.items():
+        sig[f"text_{k}"] = prob[f"text_{k}"] = v
+    sig["text_best"] = prob["text_best"] = text_scores[text_record["selected"]]
     levels_t = list(range(1, int(f.get("max_steps", 6)) + 1))
     kinds_sorted = sorted(KINDS)
     t_tr = np.array([s["t"] for s in steps_tr])
@@ -361,14 +386,16 @@ def score_model(train_run, target_run, f, sc):
     P_tr, P_te = one_hot(t_tr, levels_t), one_hot(t, levels_t)
     PK_tr = np.hstack([P_tr, one_hot(k_tr, kinds_sorted)])
     PK_te = np.hstack([P_te, one_hot(kind, kinds_sorted)])
-    for name, A, B in (("step_index", P_tr, P_te), ("step_index_type", PK_tr, PK_te)):
+    for name, A, B in (("step_index", P_tr, P_te), ("step_index_type", PK_tr, PK_te),
+                       ("question_only_step_index", np.hstack([P_tr, logit(q_oof_tr)[:, None]]),
+                        np.hstack([P_te, logit(sig["question_only"])[:, None]]))):
         sig[name] = prob[name] = LogisticRegression(C=1e4, max_iter=2000).fit(A, y_tr).predict_proba(B)[:, 1]
 
     A = lambda s: (lambda i: auroc(sig[s][i], y[i]))  # noqa: E731
     D = lambda a, b: (lambda i: auroc(sig[a][i], y[i]) - auroc(sig[b][i], y[i]))  # noqa: E731
     search, finish = kind == "Search", kind == "Finish"
     out = {"n_steps": int(len(y)), "n_questions": int(len(boot.ids)), "step_accuracy": float(y.mean()),
-           "readouts": readouts, "signals": {}}
+           "readouts": readouts, "text_baselines": text_record, "signals": {}}
     for s in sig:
         out["signals"][s] = {"auroc": boot.interval(A(s)), "ece": ece(prob[s], y), "brier": brier(prob[s], y),
                              "auroc_search": auroc(sig[s][search], y[search]),
@@ -377,7 +404,7 @@ def score_model(train_run, target_run, f, sc):
     lvl = 1 - 0.05 / BONFERRONI
     out["primary"] = {
         "P1_probe_minus_consistency": boot.interval(D("probe_action", "consistency"), level=lvl),
-        "P2_probe_minus_visible_text": boot.interval(D("probe_action", "visible_text"), level=lvl),
+        "P2_probe_minus_text_best": boot.interval(D("probe_action", "text_best"), level=lvl),
         "P3_prestep_minus_step_index": boot.interval(D("probe_pre_step", "step_index"), level=lvl),
     }
     within = pooled_pairs_interval(boot, y, sig["probe_action"], sig["consistency"])
@@ -385,17 +412,20 @@ def score_model(train_run, target_run, f, sc):
         "S1_search_probe_minus_consistency": boot.interval(D("probe_action", "consistency"), mask=search),
         "S2_within_question_probe_minus_consistency": within["difference"],
         "S3_probe_minus_step_index_type": boot.interval(D("probe_action", "step_index_type")),
+        "S6_prestep_minus_question_only_step_index": boot.interval(D("probe_pre_step", "question_only_step_index")),
     }
     est = {"primary_at_95": {k: boot.interval(D(*pair)) for k, pair in (
-        ("P1", ("probe_action", "consistency")), ("P2", ("probe_action", "visible_text")),
+        ("P1", ("probe_action", "consistency")), ("P2", ("probe_action", "text_best")),
         ("P3", ("probe_pre_step", "step_index")))}}
     est["within_question"] = within
     est["finish_probe_minus_consistency"] = boot.interval(D("probe_action", "consistency"), mask=finish)
     for p in PRE_POINTS:
         est[f"{p}_minus_consistency"] = boot.interval(D(f"probe_{p}", "consistency"))
         est[f"{p}_minus_probe_action"] = boot.interval(D(f"probe_{p}", "probe_action"))
-    for b in ("verbalized", "lp_mean", "lp_min"):
+    for b in ("verbalized", "lp_mean", "lp_min", "visible_text", "text_handcrafted", "text_tfidf",
+              "text_embedding"):
         est[f"probe_minus_{b}"] = boot.interval(D("probe_action", b))
+    est["question_only_minus_step_index"] = boot.interval(D("question_only", "step_index"))
     est["by_step_index"] = {}
     for k in levels_t:
         m = t == k
@@ -443,7 +473,6 @@ def score_model(train_run, target_run, f, sc):
 
     # ---- RQ3
     out["rq3"] = rq3(steps_tr, probe_oof_tr, steps_te, sig["probe_action"], episodes_te, sc)
-    out["secondary"]["S4_ece_product_minus_forward"] = out["rq3"]["finished"]["ece_product_minus_forward"]
     out["secondary"]["S5_g_final_q95"] = out["rq3"]["final_fit"]["g"]
     out["estimates"] = est
     return out
@@ -478,15 +507,19 @@ def rq3(steps_tr, s_tr, steps_te, s_te, episodes_te, sc):
                      "M1_forward": c["M1_forward"], "handoff_M1": min(c["running"]), "handoff_M0": min(run0)})
 
     def block(sel, seed=1):
+        """Unfinished episodes reached the step cap without an answer, which the system knows at that point:
+        every method gives them confidence 0 (handed off at the cap), never a probability of another event."""
         r = [x for x in recs if sel(x)]
         succ = np.array([x["success"] for x in r])
-        v = {m: np.array([x[m] for x in r]) for m in ("M0_last", "M0_product", "M0_min", "M1_forward",
-                                                       "handoff_M0", "handoff_M1")}
+        done = np.array([x["finished"] for x in r])
+        v = {m: np.where(done, np.array([x[m] for x in r]), 0.0)
+             for m in ("M0_last", "M0_product", "M0_min", "M1_forward", "handoff_M0", "handoff_M1")}
         b = Boot([x["qid"] for x in r], sc["n_boot"], seed=seed)
         res = {"n_episodes": len(r), "success_rate": float(succ.mean()),
                "methods": {m: {"auroc": auroc(v[m], succ), "ece": ece(v[m], succ), "brier": brier(v[m], succ),
                                "mean_conf": float(v[m].mean())}
                            for m in ("M0_last", "M0_product", "M0_min", "M1_forward")}}
+        # Fair comparison (same event): forward vs last. The product targets "every step correct" (descriptive).
         res["ece_product_minus_forward"] = b.interval(lambda i: ece(v["M0_product"][i], succ[i])
                                                       - ece(v["M1_forward"][i], succ[i]))
         res["ece_last_minus_forward"] = b.interval(lambda i: ece(v["M0_last"][i], succ[i])
@@ -515,17 +548,39 @@ def rq3(steps_tr, s_tr, steps_te, s_te, episodes_te, sc):
 
 # ---------------------------------------------------------------- decisions
 
+def dev_check(args, pairs):
+    """Text baselines fitted on legacy train and scored on the legacy (development) test split. Reads no held-out
+    data; meant to catch implementation problems on real trajectories before the freeze."""
+    text_features = _module("16_review_checks.py").text_features
+    encoder = resolve_encoder(pin_encoder(args.text_encoder))
+    for s, _ in pairs:
+        _, eps, steps = load_run(ROOT / s)
+        q = {e["qid"]: e["question"] for e in eps}
+        tr = [x for x in steps if x["split"] == "train"]
+        te = [x for x in steps if x["split"] == "test"]
+        tf_tr, tf_te = text_features(tr), text_features(te)
+        names = list(next(iter(tf_tr.values())))
+        T_tr = np.array([[tf_tr[(x["qid"], x["t"])][k] for k in names] for x in tr], float)
+        T_te = np.array([[tf_te[(x["qid"], x["t"])][k] for k in names] for x in te], float)
+        y_tr = np.array([x["correct"] for x in tr], int)
+        y_te = np.array([x["correct"] for x in te], int)
+        scores, rec = select_and_fit(contexts(tr, q), T_tr, y_tr, np.array([x["qid"] for x in tr]),
+                                     contexts(te, q), T_te, encoder)
+        print(s, "selected:", rec["selected"], {k: round(v["oof_auroc_train"], 3) for k, v in rec["candidates"].items()},
+              "| development test AUROC:", {k: round(auroc(v, y_te), 3) for k, v in scores.items()})
+
+
 def flags_for(o):
     above = lambda r: r["ci_lo"] > 0  # noqa: E731
     sec = o["secondary"]
     return {"P1": above(o["primary"]["P1_probe_minus_consistency"]),
-            "P2": above(o["primary"]["P2_probe_minus_visible_text"]),
+            "P2": above(o["primary"]["P2_probe_minus_text_best"]),
             "P3": above(o["primary"]["P3_prestep_minus_step_index"]),
             "S1": above(sec["S1_search_probe_minus_consistency"]),
             "S2": above(sec["S2_within_question_probe_minus_consistency"]),
             "S3": above(sec["S3_probe_minus_step_index_type"]),
-            "S4": above(sec["S4_ece_product_minus_forward"]),
-            "S5": sec["S5_g_final_q95"]["q95"] < 0}
+            "S5": sec["S5_g_final_q95"]["q95"] < 0,
+            "S6": above(sec["S6_prestep_minus_question_only_step_index"])}
 
 
 def framing(per_model_flags):
@@ -537,14 +592,16 @@ def framing(per_model_flags):
                     "to RQ2/RQ3")
     else:
         text.append("P1 confirmed: report final-split numbers in the main table")
-        if not allm["P2"]:
-            text.append("P2 not confirmed: drop the claim that the probe reads beyond the visible text")
+        text.append("P2 confirmed: the probe beats the strongest pre-specified text baseline" if allm["P2"] else
+                    "P2 not confirmed: claim only that the probe beats output-based signals; report the text "
+                    "baselines as matching it")
     text.append("P3 confirmed: keep the pre-step detection claim" if allm["P3"] else
                 "P3 not confirmed: drop the pre-step detection claim; pre-step results move to an appendix")
-    text.append("S4 confirmed: keep 'forward recursion repairs the product's underconfidence'" if allm["S4"] else
-                "S4 not confirmed: do not claim the forward recursion repairs the product")
-    text.append("S5 confirmed: keep the error-coupling description" if allm["S5"] else
-                "S5 not confirmed: say coupling was observed on the legacy split only")
+    if allm["P3"]:
+        text.append("S6 confirmed: the pre-step signal goes beyond question difficulty and position" if allm["S6"]
+                    else "S6 not confirmed: describe the pre-step signal as largely question difficulty and position")
+    text.append("S5 confirmed: keep the error-association description" if allm["S5"] else
+                "S5 not confirmed: say the association was observed on the legacy split only")
     return allm, text
 
 
@@ -557,6 +614,8 @@ def main():
     ap.add_argument("--out", type=Path, default=ROOT / "results/main_confirmation.json")
     ap.add_argument("--freeze", action="store_true")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--dev-check", action="store_true", help="text baselines on the development test split only")
+    ap.add_argument("--text-encoder", default=DEFAULT_ENCODER, help=argparse.SUPPRESS)  # synthetic freezes: hash:<d>
     for k in ("pca", "n-boot", "draws", "tune", "chains"):  # synthetic freezes only
         ap.add_argument(f"--{k}", type=int, help=argparse.SUPPRESS)
     args = ap.parse_args()
@@ -568,8 +627,10 @@ def main():
 def run(args):
     supplied = any(getattr(args, k) is not None for k in ("pca", "n_boot", "draws", "tune", "chains"))
     official = args.frozen.resolve() == (ROOT / "manifests/main_confirmation/v1_frozen_inputs.json").resolve()
+    if args.dev_check:
+        return dev_check(args, [tuple(p.split("=", 1)) for p in args.pairs or DEFAULT_PAIRS])
     if args.freeze:
-        if official and (args.pairs or supplied or args.split != "final"):
+        if official and (args.pairs or supplied or args.split != "final" or args.text_encoder != DEFAULT_ENCODER):
             raise SystemExit("Use the registered models, final split and scoring settings for the official freeze")
         for k, v in (("pca", 64), ("n_boot", 2000), ("draws", 1000), ("tune", 1000), ("chains", 4)):
             setattr(args, k, v if getattr(args, k) is None else getattr(args, k))

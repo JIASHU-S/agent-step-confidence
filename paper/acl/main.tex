@@ -31,17 +31,18 @@
 LLM agents fail in the middle of a trajectory, yet most uncertainty estimates are computed once, for a final answer.
 We study confidence at the level of individual agent steps. ReAct agents built on Qwen2.5-7B-Instruct and
 Llama-3.1-8B-Instruct answer HotpotQA questions by searching a fixed set of paragraphs, and every step receives an
-automatic correctness label. We ask three questions. (1)~Which signal best detects a wrong step? A linear probe on
+automatic, benchmark-defined correctness label. We ask three questions. (1)~Which signal best detects a wrong step? A linear probe on
 mid-to-late hidden states, read after the action is written, reaches AUROC 0.835 and 0.878, ahead of sampling
-consistency (0.732, 0.773), a classifier on the visible action text and history (0.745, 0.746), verbalized
-confidence and token log-probability; the advantage comes from search steps, and a probe read before the step is
-generated still beats step position. (2)~Which errors does a probe trained on another task detect? In a
+consistency (0.732, 0.773), a classifier on features of the visible action text and history (0.745, 0.746),
+verbalized confidence and token log-probability; the advantage comes from search steps, and a probe read before the
+step is generated still beats step position. (2)~Which errors does a probe trained on another task detect? In a
 pre-registered study confirmed on 600 held-out questions per model, a probe trained to judge document choice
-detects distractor retrievals better than one trained on closed-book answer correctness (+0.13 and +0.07 AUROC),
-while neither is clearly better on final answers: what a transferred probe detects depends on what its source
-labels measure. (3)~Are step errors coupled? A Bayesian model with a previous-error term is preferred under
-PSIS-LOO, but for Qwen the coupling is largely question difficulty. Marginalising the unknown previous error repairs
-the severe underconfidence of multiplied step confidences, but is not better than the last step's confidence alone.
+detects distractor retrievals better than one trained on closed-book answer correctness (+0.13 and +0.07 AUROC).
+The gain comes with a measurable loss on final answers for Llama ($-0.05$), while for Qwen the final-answer
+difference is inconclusive. Transfer is thus error-type specific and depends on the source task and its
+supervision. (3)~Does step-level confidence improve trajectory confidence? Errors on consecutive steps are
+associated, partly through question difficulty, but a Bayesian model of this coupling predicts final success no
+better than the last step's confidence alone.
 \end{abstract}
 
 \section{Introduction}
@@ -61,13 +62,15 @@ multiplying step-level probabilities assumes independent steps, while step error
 
 Our contributions are:
 (i)~an offline agent benchmark with automatic step labels and four step-level signals, for two models;
-(ii)~evidence that hidden-state probes detect wrong steps better than output-based signals, step position and the
-visible action text, mainly on retrieval steps, and carry part of this signal before the step is written;
-(iii)~a pre-registered, held-out test of \emph{what} transfers from single-step QA: the error types a transferred
-probe detects follow the content of its source labels, and conclusions drawn from a single source-selected layer
-do not replicate, while an average over upper layers does; and
-(iv)~a Bayesian comparison of coupled and independent step-error models, showing that marginalising the coupling
-avoids the underconfidence of multiplied step confidences without beating the last step's confidence.
+(ii)~evidence that linear read-outs of hidden states detect wrong steps better than output-based signals, step
+position and text-based predictors of the visible context, mainly on retrieval steps, and carry part of this
+signal before the step is written;
+(iii)~a pre-registered, held-out test of \emph{which} agent errors a transferred probe detects: a source task that
+judges document choice covers distractor retrievals that an answer-correctness source misses, and conclusions
+drawn from a single source-selected layer do not replicate across models, while the mean AUROC over a fixed set of
+upper-layer read-outs does; and
+(iv)~a bounded negative result for trajectory confidence: modelling the association between consecutive step
+errors does not predict final success better than the last step's confidence.
 
 \begin{table*}[t]
 \centering\small
@@ -129,7 +132,10 @@ was used only for the pre-registered tests below.
 
 \textbf{Step labels.} A \search{} is correct if it returns a supporting paragraph not retrieved before; a
 \finish{} is correct if its token F1 with the gold answer is at least 0.5; unparsable actions are incorrect.
-No judge model is needed. An episode succeeds if its final answer is correct.
+No judge model is needed. An episode succeeds if its final answer is correct. These labels define
+\emph{benchmark-defined action correctness}, not reasoning correctness in general: a repeated search may still be
+useful, a non-supporting paragraph may carry a bridging fact, and token F1 can misjudge a paraphrased answer. We
+report a lenient-label sensitivity analysis and a manual audit.
 
 \textbf{Signals.} For every step we record: hidden states of eight evenly spaced layers, mean-pooled over the
 action tokens and at the last action token (teacher-forced, i.e.\ once the action is written and before the tool
@@ -157,12 +163,14 @@ token of ``\texttt{Thought $t$:}'' (before the step) and at the last token befor
 on the answer-span states is applied to agent steps without agent labels for its weights, and after Platt scaling
 on 50 agent steps; its read-out is the agent probe's, or the best by five-fold AUROC on TriviaQA.
 
-\textbf{Source swap.} To ask \emph{which} agent errors a transferred probe detects, we vary what the source labels
-measure. S0 labels closed-book answer correctness (TriviaQA, as above). S2-QA labels document choice: given a
+\textbf{Source swap.} To ask \emph{which} agent errors a transferred probe detects, we compare source tasks that
+differ in what their labels measure. S0 labels closed-book answer correctness (TriviaQA, as above). S2-QA labels document choice: given a
 2WikiMultihopQA question \citep{ho2020constructing} and the titles of its ten paragraphs, the model names the
 paragraph to read first (or, after one gold paragraph is shown, the next one), and the label is whether that
 paragraph is supporting and new, the same rule as for agent searches. C1 asks the TriviaQA questions in the ReAct
-format and isolates the prompt format. Each source is balanced to $m$ positives and $m$ negatives
+format and isolates the prompt format for the answer task. S0 and S2-QA still differ in dataset, input context and
+output form as well as in supervision, so the comparison identifies source-task effects, not the effect of the
+label alone. Each source is balanced to $m$ positives and $m$ negatives
 ($m=446$ and $693$). Target scores are \emph{same-step} AUROCs, comparing only correct and wrong steps at the same
 step index, for two contrasts: \finish{} steps, and correct searches against \emph{distractor} searches that
 return a new non-supporting paragraph. The pre-registered quantities are the retrieval gain
@@ -175,12 +183,15 @@ $e_{t-1}=1-y_{t-1}$ an error at the previous step ($e_0=0$). We compare
 \text{M0: } & \operatorname{logit} P(y_t=1) = a_{k_t} + b_{k_t} s_t,\\
 \text{M1: } & \operatorname{logit} P(y_t=1) = a_{k_t} + b_{k_t} s_t + g\, e_{t-1},
 \end{align*}
-with $\mathcal{N}(0,2^2)$ priors, fitted in PyMC \citep{abrilpla2023pymc} and compared by PSIS-LOO
-\citep{vehtari2017practical} through the signal ratio $\mathrm{SR}=\Delta\mathrm{ELPD}/\mathrm{SE}$
-\citep{shi2026bayesian}. At test time $y_{t-1}$ is unknown, so M1's trajectory confidence marginalises it with a
+with $\mathcal{N}(0,2^2)$ priors, fitted in PyMC \citep{abrilpla2023pymc}. As a descriptive check we compare
+them by pointwise PSIS-LOO \citep{vehtari2017practical} through the signal ratio
+$\mathrm{SR}=\Delta\mathrm{ELPD}/\mathrm{SE}$ \citep{shi2026bayesian}; because M1 conditions on the true previous
+label, this measures a conditional association, not prediction for new trajectories, which we evaluate on
+held-out questions with the previous label marginalised. At test time $y_{t-1}$ is unknown, so M1's trajectory confidence marginalises it with a
 two-state forward recursion, $q_0=1$, $q_t = q_{t-1}\sigma(\eta_t) + (1-q_{t-1})\sigma(\eta_t+g)$, and $q_T$
-estimates the probability that the final answer is correct. Baselines aggregate M0's step probabilities by
-product, minimum, or the last step only. A hand-off policy passes an episode to a person at the first step whose
+estimates the probability that the final answer is correct. The fair baseline for the same event is M0's last-step
+probability. We also report two common heuristics: the product of M0's step probabilities, which estimates the
+different event that \emph{every} step is correct, and their minimum. A hand-off policy passes an episode to a person at the first step whose
 running confidence falls below $\tau$.
 
 \textbf{Inference and pre-registration.} Gaps are full-sample point estimates with percentile intervals over 2000
@@ -263,12 +274,15 @@ development training split). P1--P3: 98.3\% CIs (Bonferroni over three claims); 
 Pre-registered gap & Qwen2.5-7B & Llama-3.1-8B \\
 \midrule
 P1 probe $-$ consistency & \tbd & \tbd \\
-P2 probe $-$ visible text & \tbd & \tbd \\
+P2 probe $-$ strongest text baseline & \tbd & \tbd \\
 P3 pre-step probe $-$ step index & \tbd & \tbd \\
 S1 \search{}: probe $-$ consistency & \tbd & \tbd \\
 S2 within question & \tbd & \tbd \\
-S4 ECE product $-$ forward & \tbd & \tbd \\
 S5 $g$ (90\% interval) & \tbd & \tbd \\
+S6 pre-step $-$ question-only + step index & \tbd & \tbd \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Estimate only}} \\
+AUROC forward $-$ last (all episodes) & \tbd & \tbd \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -284,8 +298,8 @@ this (mean ECE 0.093 and 0.122) without changing the ranking. For Qwen this matc
 the same 50 steps (AUROC 0.731); for Llama the small in-domain probe is better (0.779).
 
 \textbf{Which errors transfer.} On the development split the TriviaQA probe detected wrong answers about as well as
-an in-domain probe but lagged it on distractor searches, suggesting that a source covers the errors its labels
-measure. The source-swap study tests this. Its first pre-registered version chose one read-out per source on
+an in-domain probe but lagged it on distractor searches, suggesting that a source covers some error types better
+than others. The source-swap study tests this. Its first pre-registered version chose one read-out per source on
 source validation data; on the development split this gave $I=+0.351$ [0.224, 0.480] for Qwen but $+0.080$
 [$-0.044$, 0.208] for Llama, so the interaction was not established. The layer curves showed the Llama result
 hinged on all three sources selecting the same layer, where S0 happened to peak. Having seen this, we revised the
@@ -319,7 +333,8 @@ answer correctness. The finish cost is inconclusive for Qwen and a small loss fo
 pre-registered mapping we claim the retrieval gain only, not that the swap is free on final answers. Changing only
 the format (C1 $-$ S0) moves finish AUROC by less than 0.01 in both models. The single-read-out rule, scored on the
 same held-out data, again disagrees across models (Table~\ref{tab:swap}, last column): conclusions about transfer from
-one selected layer are fragile, and averaging over the layers where transfer occurs makes them stable. A 2WikiMultihopQA
+one selected layer are fragile, while the mean AUROC across a fixed set of upper-layer read-outs gives the same
+conclusion in both models. This mean is an evaluation summary, not an ensemble detector. A 2WikiMultihopQA
 ReAct source was also planned, but the model almost never chose a wrong document in that format (2\% of
 searches), too few negatives to train on (Appendix~\ref{app:swap}).
 
@@ -343,23 +358,24 @@ M0 product & 0.664 & 0.200 & 0.260 & 0.642 & 0.326 & 0.299 \\
 \end{tabular}}
 \end{table}
 
-\subsection{RQ3: coupling is partly question difficulty}
-M1 is preferred to M0 in both models (Qwen: $\Delta$ELPD $=5.58$, SE $=3.75$, SR $=1.49$, all Pareto $k<0.16$;
+\subsection{RQ3: coupling adds little over the last step}
+Under pointwise PSIS-LOO, M1 is preferred to M0 in both models (Qwen: $\Delta$ELPD $=5.58$, SE $=3.75$, SR $=1.49$, all Pareto $k<0.16$;
 Llama: $\Delta$ELPD $=7.22$, SE $=4.17$, SR $=1.73$, maximum Pareto $k=0.76$, so the Llama comparison needs
 caution). The coupling coefficients agree closely: $g=-0.58$ $[-0.84,-0.33]$ and $g=-0.62$ $[-0.87,-0.37]$ (90\%
 intervals): after an error, the odds that the next step is correct fall to about 0.55 of their value, even given
 the probe signal. This is a conditional association, not propagation. Hard questions could also cause runs of
 errors. With a question random intercept, $g$ is $-0.44$ $[-0.76,-0.10]$ for Qwen and $-0.59$ $[-0.85,-0.33]$ for
-Llama, but PSIS-LOO then prefers M1 only for Llama (SR $-0.87$ and 1.32). Multiplying step confidences badly
-underestimates success (mean confidence 0.44 and 0.45 versus 63.6\% and 78.1\% observed), because a wasted search
-is often recovered. The forward recursion removes most of this error (ECE 0.027 versus 0.200, gap CI [0.082,
-0.186]; 0.104 versus 0.326, CI [0.189, 0.244]; Table~\ref{tab:rq3}). Its calibration, however, does not differ
-significantly from the last step alone (ECE gap last $-$ forward 0.030, CI [$-0.030$, 0.055]; $-0.008$, CI
+Llama, but PSIS-LOO then prefers M1 only for Llama (SR $-0.87$ and 1.32). For predicting final success on new questions, the fair
+comparison is the forward recursion against M0's last step, which target the same event. The forward recursion's
+calibration does not differ significantly from the last step alone (ECE gap last $-$ forward 0.030, CI [$-0.030$, 0.055]; $-0.008$, CI
 [$-0.024$, 0.033]), and it does not rank episodes better (AUROC gap $-0.004$, CI [$-0.017$, 0.009]; $+0.006$, CI
 [$-0.015$, 0.028]). The hand-off curve of M1 lies at or above that of M0's running product
 (Fig.~\ref{fig:handoff}), but the difference in area under the risk--coverage curve is not significant (0.019, CI
 [$-0.003$, 0.041]; 0.005, CI [$-0.010$, 0.020]), and the same first-drop rule on M0's current-step probability
-matches M1, so the gap comes from the aggregation rule, not the history term.
+matches M1, so the gap comes from the aggregation rule, not the history term. The product of step confidences,
+a common heuristic, is far less calibrated (ECE 0.200 and 0.326; mean confidence 0.44 and 0.45 against 63.6\% and
+78.1\% success; Table~\ref{tab:rq3}), but this is expected: it estimates that every step is correct, while agents
+often recover from a wasted search.
 
 \begin{figure}[t]
 \centering
@@ -370,23 +386,29 @@ $\tau$. Bands: 95\% episode bootstrap; points keeping under 10\% are omitted.}
 \end{figure}
 
 \section{Discussion}
-Internal states carry information about step correctness that output-based signals, step position and the visible
-action text miss, concentrated on retrieval steps; judging a final answer remains as hard for the probe as for
-sampling. The source-swap results sharpen the transfer picture: a probe trained elsewhere is not a generic
-``something is wrong'' detector, and which agent errors it covers follows what its source labels measure. Two
+Hidden states are computed from the visible context, so a probe cannot know more than that context; what our
+results show is that a linear read-out of the model's own states extracts step correctness more effectively than
+output-based signals, step position and the text-based predictors we tried, mainly on retrieval steps. Judging a
+final answer remains as hard for the probe as for sampling. The source-swap results sharpen the transfer picture: a
+probe trained elsewhere is not a generic ``something is wrong'' detector, and which agent errors it covers depends
+on the source task and its supervision. They do not show that the label alone causes the difference, nor that the
+model holds separate correctness representations; a source matched in dataset and input is needed for that. Two
 methodological lessons generalise. First, transfer conclusions drawn from a single read-out selected on source data
-can reverse between models and splits; averaging over the layers where transfer occurs is more stable. Second,
-multiplying step confidences is a poor trajectory estimate in agents that recover from wasted steps, but modelling
-the coupling explicitly does not beat simply trusting the last step.
+can reverse between models and splits; summarising over a fixed set of read-outs is more stable. Second, the product
+of step confidences answers a different question from final success, and explicitly modelling error coupling does
+not beat simply trusting the last step.
 
 \section*{Limitations}
 The study uses one environment (HotpotQA with a fixed paragraph set), one seed and two 7--8B models in 4-bit
 precision; longer-horizon or interactive environments and larger models may behave differently. Step labels are
 automatic and conservative: a repeated search counts as wrong and a final answer is judged by token F1, and we have
 not yet completed a manual audit of the labels. RQ1 and RQ3 figures in the main text come from a 300-question
-development split that was analysed repeatedly; their held-out confirmation is Table~\ref{tab:confirm}. The
-source-swap read-out rule was fixed after seeing development data, which is why only the held-out test is counted
+development split that was analysed repeatedly; their held-out confirmation is Table~\ref{tab:confirm}, a
+pre-specified analysis of held-out trajectories whose labels had already been used for the source-swap test. The
+source swap compares source tasks that differ in more than their labels, so it does not isolate the effect of
+supervision. The source-swap read-out rule was fixed after seeing development data, which is why only the held-out test is counted
 as evidence; its conclusions are limited to HotpotQA, and we do not claim that the finish cost is negligible.
+Error coupling is an association conditional on the probe signal, not evidence that one error causes the next.
 Trajectory-level results on the development split use finished episodes only; the excluded unfinished episodes
 (4.7\% and 10.3\%) are all failures, so kept accuracy in the hand-off curves is optimistic. Hand-offs are simulated
 on recorded trajectories; we have not intervened online, and the effect of replanning or human takeover cannot be

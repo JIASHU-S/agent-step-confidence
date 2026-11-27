@@ -1,6 +1,6 @@
 **主结果确认协议 v1（MC1）— 2026-11-25**
 
-状态：**草案已提交，未冻结。** 分析代码（`scripts/23_confirm_main.py`）与本文件一起提交；git 提交时间早于任何评分。冻结 = 在 Windows 机器上运行 `python scripts/23_confirm_main.py --freeze`，写入 `manifests/main_confirmation/v1_frozen_inputs.json`。冻结后的修改另起版本并说明原因。
+状态：**v1.1（第 8 节）取代第 1–7 节中与之冲突的部分；草案已提交，未冻结。** 分析代码（`scripts/23_confirm_main.py`）与本文件一起提交；git 提交时间早于任何评分。冻结 = 在 Windows 机器上运行 `python scripts/23_confirm_main.py --freeze`，写入 `manifests/main_confirmation/v1_frozen_inputs.json`。冻结后的修改另起版本并说明原因。
 
 **1. 目的**
 
@@ -82,3 +82,21 @@ forward 与 last 的差值无论落在哪里都只作估计；不声称两者等
 **7. 功效（按 legacy 的效应和 1/√n 换算到 600 题）**
 
 legacy 上 P1/P2/P3 的差值为 0.09–0.20，95% 区间半宽约 0.03；600 题时半宽约 0.024，98.33% 区间半宽约 0.029。若真实效应为 legacy 的一半（约 0.05），单项单模型功效仍约 0.9。S5 在 legacy 上 g ≈ −0.6，后验 90% 区间半宽约 0.25，600 题时约 0.18。
+
+**8. v1.1 修订（2026-11-27，冻结前；尚未在 final 上计算任何本协议的指标）**
+
+修订原因：外部审稿意见（2026-11-28 版 review 的 R1-1、R1-2、R3-1、R3-2、R3-4）。修订时 v1 既未冻结也未评分，所以仍属预登记。以下各条取代前文对应内容。
+
+- **P2 改为对最强的预设文本基线。** 候选三个，都只用 action 写出时 agent 上下文中可见的内容：问题、此前各步（thought、action 及其返回的 observation）、当前 thought 和 action。不使用当前步的 observation、金标准答案或支撑段落标记。
+  1. handcrafted：v1 的 14 个特征；
+  2. tfidf：问题、历史、当前步分别做词 1–2 gram TF-IDF，加上 handcrafted 特征；
+  3. embedding：句向量编码器（`sentence-transformers/all-MiniLM-L6-v2`，冻结时解析并记录 commit）对问题、历史、当前步分别编码，再加三者之间的余弦相似度、当前步与此前任一 observation 的最大相似度，以及 handcrafted 特征。
+
+  三者都用 logistic 回归。正则化 C 在 {0.01, 0.1, 1, 10} 中、候选在三者中，都按 legacy train 上以题分组的 5 折 OOF AUROC 选择。**选择只读 legacy train 标签**；选中者即 P2 的对照，其余作为估计报告。v1 的 14 特征基线保留为估计项。
+  论文表述随之改为"线性读出隐藏状态比指定的文本预测器更有效地提取步骤正确性"。隐藏状态由可见文本计算而来，不声称"含有文本之外的信息"。
+- **新增 S6（次要）：只看问题的对照。** 每条轨迹第 1 步的 pre-step 状态只包含提示词和问题，把它重复用于该轨迹的所有步骤，作为"只看问题"的表示。层按 legacy train 上以题分组的 OOF AUROC 选择。"只看问题 + 步号"为 logistic 回归，输入步号 one-hot 和只看问题 probe 的 logit（train 上用 OOF 分数拟合）。S6：AUROC(pre-step probe) − AUROC(只看问题 + 步号) 的 95% 区间下界 > 0，两个模型都成立才算。另报告只看问题 probe 相对步号的估计。
+- **S4 取消，改为描述性结果。** 连乘估计的是"每一步都对"，与最终答对不是同一事件，比较它与 forward 不能作为耦合模型的证据。RQ3 的主比较为 M1 forward vs M0 last（同一事件），只报告估计和区间，不做优劣检验。
+- **未完成轨迹。** 撞到步数上限而没有回答的轨迹，系统在那一刻已经知道结果。全轨迹版本中，所有方法都给这类轨迹置信度 0，hand-off 也在上限处发生。不再用最后一个 Search 的正确概率代替最终答对的概率。
+- **PSIS-LOO 降为辅助证据。** M1 以真实的上一步标签为条件，逐点 LOO 衡量的是条件关联，不是对新轨迹的预测。新轨迹上的证据是 final 上 forward vs last 的比较，那里上一步标签被边缘化。S5（g 的区间）仍保留，表述为"关联"，不说"传播"。
+- **第 5 节表述映射的修改：** 删除 S4 一行。新增：P2 不成立时，只声称优于输出类信号，并报告文本基线与 probe 相当；S6 不成立时，把 pre-step 信号描述为主要反映问题难度和步骤位置。
+- **执行顺序的补充：** 冻结前先在开发集上检查文本基线的实现：`python scripts/23_confirm_main.py --dev-check`。它在 legacy train 上拟合，在 legacy test 上评分，不读取 final。这一步只用来发现实现问题，不据此修改候选、网格或选择规则；如需修改，另起版本并说明。

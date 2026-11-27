@@ -98,6 +98,10 @@ def test_sample_blinding_and_score(tmp_path):
     assert r.returncode == 0, r.stderr
     res = json.loads((out / "audit_results.json").read_text())
     assert all(abs(v - 1) < 1e-9 for v in res["annotators"]["A"]["strict"]["weighted_accuracy"].values())
+    for lo, hi in res["annotators"]["A"]["strict"]["weighted_accuracy_ci95"].values():
+        assert abs(lo - 1) < 1e-9 and abs(hi - 1) < 1e-9
+    strata = res["annotators"]["B"]["strict"]["by_stratum"]
+    assert all(v["n_excluded"] == 0 for v in strata.values() if v["n_coded"])
     assert res["inter_annotator"]["n"] == len(key["steps"])
     assert set(res["inter_annotator"]["disagreements"]) == {i for i in flip
                                                             if next(x for x in strat if x["item_id"] == i)["kind"]

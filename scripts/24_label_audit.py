@@ -140,14 +140,9 @@ def sample(args):
                 pool[s["stratum"]].append(s)
         population[model] = {st: len(v) for st, v in pool.items()}
         for st, quota in QUOTA.items():
-            picks = sorted(pool.get(st, []), key=lambda s: h("pick", model, s["qid"], s["t"]))
-            taken, used_q = [], set()
-            for s in picks:  # at most one step per question per stratum
-                if s["qid"] not in used_q:
-                    taken.append(s)
-                    used_q.add(s["qid"])
-                if len(taken) == quota:
-                    break
+            # Equal-probability sampling without replacement within the stratum (salted-hash order), so every step
+            # of the stratum has inclusion probability n_sampled / n_population.
+            taken = sorted(pool.get(st, []), key=lambda s: h("pick", model, s["qid"], s["t"]))[:quota]
             for s in taken:
                 iid = h("step", model, s["qid"], s["t"])[:10]
                 steps_out.append(step_row(iid, ep_by[s["qid"]], s))
@@ -218,19 +213,40 @@ def agreement(key, codes, lenient):
     out = {"n_scored": len(rows), "by_stratum": {}}
     for st in QUOTA:
         rs = [(r, y) for r, y in rows if r["stratum"] == st]
+        n_all = sum(1 for r in key["steps"] if r["stratum"] == st and codes.get(r["item_id"]))
         k = sum(int(r["auto_label"] == y) for r, y in rs)
         out["by_stratum"][st] = {"n": len(rs), "agree": k, "rate": k / len(rs) if rs else float("nan"),
-                                 "wilson95": wilson(k, len(rs))}
-    # Population-weighted label accuracy from the stratified part only, per model.
-    out["weighted_accuracy"] = {}
+                                 "wilson95": wilson(k, len(rs)), "n_coded": n_all,
+                                 "n_excluded": n_all - len(rs),
+                                 "excluded_share": (n_all - len(rs)) / n_all if n_all else float("nan")}
+    # Population-weighted agreement from the stratified part, per model: stratum weight n_population, estimand =
+    # agreement among steps whose human code is decisive (excluded codes are reported separately above). 95% CI from
+    # a bootstrap that resamples questions within each stratum.
+    out["weighted_accuracy"], out["weighted_accuracy_ci95"] = {}, {}
+    rng = np.random.default_rng(0)
     for model, pop in key["population"].items():
-        num = den = 0.0
-        for st, n_pop in pop.items():
-            rs = [(r, y) for r, y in rows if r["stratum"] == st and r["model"] == model and r["source"] == "stratified"]
-            if rs:
-                num += n_pop * np.mean([r["auto_label"] == y for r, y in rs])
-                den += n_pop
-        out["weighted_accuracy"][model] = num / den if den else float("nan")
+        cells = {st: [(r["qid"], int(r["auto_label"] == y)) for r, y in rows
+                      if r["stratum"] == st and r["model"] == model and r["source"] == "stratified"]
+                 for st in pop}
+        cells = {st: c for st, c in cells.items() if c}
+
+        def estimate(cs):
+            den = sum(pop[st] for st in cs)
+            return sum(pop[st] * np.mean([a for _, a in c]) for st, c in cs.items()) / den if den else np.nan
+
+        out["weighted_accuracy"][model] = float(estimate(cells))
+        reps = []
+        for _ in range(1000):
+            res = {}
+            for st, c in cells.items():
+                by_q = defaultdict(list)
+                for q, a in c:
+                    by_q[q].append((q, a))
+                qs = list(by_q)
+                res[st] = [x for i in rng.integers(0, len(qs), len(qs)) for x in by_q[qs[i]]]
+            reps.append(estimate(res))
+        out["weighted_accuracy_ci95"][model] = ([float(np.nanpercentile(reps, 2.5)), float(np.nanpercentile(reps, 97.5))]
+                                                if cells else [float("nan")] * 2)
     conf = Counter((r["kind"], r["auto_label"], y) for r, y in rows)
     out["confusion"] = [{"kind": k, "auto": a, "human": y, "n": n} for (k, a, y), n in sorted(conf.items())]
     return out
